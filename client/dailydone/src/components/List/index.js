@@ -20,8 +20,10 @@ class List extends Component {
     this.setState({ list: response.data, loading: false });
   };
 
-  removeItem = id => {
-    api.delete(`completed/${id}`);
+  removeItem = async id => {
+    this.setState({ loading: true });
+    await api.delete(`completed/${id}`);
+    this.updateList();
   };
 
   handleSubmit = async (data, { resetForm }) => {
