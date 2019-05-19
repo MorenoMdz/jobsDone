@@ -1,0 +1,16 @@
+{
+  "name": "dailydone",
+  "version": "1.0.0",
+  "description": "Fake Rest API for the dailydone project",
+  "main": "index.js",
+  "dependencies": {
+    "json-server": "^0.14.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "json:server": "json-server --watch db.json --port 3004"
+  },
+  "author": "",
+  "license": "ISC"
+}
