@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import { Form, Input } from '@rocketseat/unform';
-// import FormGroup from '../FormGroup';
 
 class List extends Component {
   state = {
