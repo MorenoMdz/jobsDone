@@ -19,11 +19,6 @@ class List extends Component {
     this.setState({ list: response.data, loading: false });
   };
 
-  updateList = async () => {
-    const response = await api.get('completed');
-    this.setState({ list: response.data, loading: false });
-  };
-
   removeItem = async id => {
     this.setState({ loading: true });
     await api.delete(`completed/${id}`);
