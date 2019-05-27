@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
-import { Form /* Input */ } from '@rocketseat/unform';
+import { Form } from '@rocketseat/unform';
 
-import { Container, FormBox, FormInput } from './styles';
+import { Container, FormBox, FormInput, TasksList } from './styles';
 
 class List extends Component {
   state = {
@@ -93,21 +93,25 @@ class List extends Component {
             <button type="submit">Save</button>
           </Form>
         </FormBox>
-        <div>
-          <span>Feito</span>
-          <span>Tipo</span>
-          <span>Valor</span>
-        </div>
-        {!loading ? (
-          <ul>
-            {list &&
-              list.map(item =>
-                !item.editable ? displayItem(item) : editItem(item)
-              )}
-          </ul>
-        ) : (
-          <p>loading...</p>
-        )}
+        <TasksList>
+          <div>
+            <span>Feito</span>
+            <span>Tipo</span>
+            <span>Valor</span>
+          </div>
+          <div>
+            {!loading ? (
+              <ul>
+                {list &&
+                  list.map(item =>
+                    !item.editable ? displayItem(item) : editItem(item)
+                  )}
+              </ul>
+            ) : (
+              <p>loading...</p>
+            )}
+          </div>
+        </TasksList>
       </Container>
     );
   }

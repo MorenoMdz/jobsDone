@@ -3,12 +3,21 @@ import { Input } from '@rocketseat/unform';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
   padding: 10px 12px;
   background: #333;
-  height: 100%;
+  height: 90vh;
+`;
+
+export const TasksList = styled.div`
+  padding: 0 20px;
+
+  li {
+    list-style: none;
+    padding: 5px 0px;
+  }
 `;
 
 export const FormBox = styled.div`
