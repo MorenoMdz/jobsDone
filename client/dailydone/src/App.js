@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import GlobalStyle from './styles/global';
 
-import Main from './components/Main';
+import Routes from './routes';
 
-const App = () => <Main />;
+const App = () => (
+  <Fragment>
+    <GlobalStyle />
+    <Routes />
+  </Fragment>
+);
 
 export default App;
