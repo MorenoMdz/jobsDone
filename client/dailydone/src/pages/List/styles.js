@@ -15,8 +15,44 @@ export const TasksList = styled.div`
   padding: 0 20px;
 
   li {
+    display: flex;
+    flex-direction: row;
     list-style: none;
-    padding: 5px 0px;
+    padding: 5px 0;
+
+    span {
+      padding: 3px;
+      margin: 0 5px;
+      text-align: center;
+      min-width: 100px;
+      border-bottom: 1px solid white;
+      border-right: 1px solid white;
+    }
+
+    .text {
+      min-width: 200px;
+      /* text wrap */
+    }
+
+    .type,
+    .value,
+    .time {
+      min-width: 100px;
+      max-width: 200px;
+    }
+
+    button {
+      display: none;
+      padding: 0 10px;
+      margin: 0 5px;
+      border-radius: 2px;
+    }
+
+    :hover {
+      button {
+        display: inline;
+      }
+    }
   }
 `;
 
@@ -40,7 +76,15 @@ export const FormBox = styled.div`
   }
 
   [name='text'] {
-    width: 400px;
+    min-width: 200px;
+    max-width: 800px;
+  }
+
+  [name='type'],
+  [name='value'],
+  [name='duration'] {
+    min-width: 50px;
+    max-width: 100px;
   }
 `;
 

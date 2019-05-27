@@ -37,7 +37,11 @@ class List extends Component {
 
   handleSubmit = async (data, { resetForm }) => {
     this.setState({ loading: true });
-    await api.post(`completed/`, { ...data });
+    const id = Math.floor(Math.random() * 1000);
+    await api.post(`completed/`, {
+      ...data,
+      id,
+    });
     this.updateList();
   };
 
@@ -51,31 +55,38 @@ class List extends Component {
 
     const displayItem = item => (
       <li key={item.id}>
-        {`${item.text} || ${item.type} || ${item.value}`}
-        <button
-          onClick={() => {
-            this.editItem(item.id);
-          }}
-        >
-          edit
-        </button>
-        <button
-          onClick={() => {
-            this.removeItem(item.id);
-          }}
-        >
-          x
-        </button>
+        <span className="text">{item.text}</span>
+        <span className="type">{item.type}</span>
+        <span className="value">{item.value}</span>
+        <span className="duration">{item.duration}</span>
+        {`|| >>`}
+        <div>
+          <button
+            onClick={() => {
+              this.editItem(item.id);
+            }}
+          >
+            edit
+          </button>
+          <button
+            onClick={() => {
+              this.removeItem(item.id);
+            }}
+          >
+            x
+          </button>
+        </div>
       </li>
     );
 
     const editItem = item => (
       <li key={item.id}>
         <Form onSubmit={this.handleUpdate}>
-          <FormInput type="hidden" name="id" value={item.id} />
+          {/* <FormInput type="hidden" name="id" value={item.id} /> */}
           <FormInput type="text" name="text" placeholder={item.text} />
           <FormInput type="text" name="type" placeholder={item.type} />
           <FormInput type="text" name="value" placeholder={item.value} />
+          <FormInput type="text" name="duration" placeholder={item.duration} />
           <button type="submit">Update</button>
         </Form>
       </li>
@@ -86,10 +97,11 @@ class List extends Component {
         <p>{flash && flash}</p>
         <FormBox>
           <Form onSubmit={this.handleSubmit}>
-            <FormInput type="number" name="id" placeholder="id toremove" />
+            {/* <FormInput type="number" name="id" placeholder="id toremove" /> */}
             <FormInput type="text" name="text" placeholder="text" />
             <FormInput type="text" name="type" placeholder="type" />
             <FormInput type="text" name="value" placeholder="value" />
+            <FormInput type="text" name="duration" placeholder="duration" />
             <button type="submit">Save</button>
           </Form>
         </FormBox>
