@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import api from '../../services/api';
 import { Form } from '@rocketseat/unform';
 
-import { Container, FormBox, FormInput, TasksList } from './styles';
+import { Container, FormBox, FormInput, ListHeader, TasksList } from './styles';
 
 class List extends Component {
   state = {
@@ -59,9 +59,10 @@ class List extends Component {
         <span className="type">{item.type}</span>
         <span className="value">{item.value}</span>
         <span className="duration">{item.duration}</span>
-        {`|| >>`}
+        {`>`}
         <div>
           <button
+            className="edit-btn"
             onClick={() => {
               this.editItem(item.id);
             }}
@@ -69,6 +70,7 @@ class List extends Component {
             edit
           </button>
           <button
+            className="remove-btn"
             onClick={() => {
               this.removeItem(item.id);
             }}
@@ -87,7 +89,9 @@ class List extends Component {
           <FormInput type="text" name="type" placeholder={item.type} />
           <FormInput type="text" name="value" placeholder={item.value} />
           <FormInput type="text" name="duration" placeholder={item.duration} />
-          <button type="submit">Update</button>
+          <button type="submit" className="teal-btn">
+            Update
+          </button>
         </Form>
       </li>
     );
@@ -106,11 +110,13 @@ class List extends Component {
           </Form>
         </FormBox>
         <TasksList>
-          <div>
-            <span>Feito</span>
-            <span>Tipo</span>
-            <span>Valor</span>
-          </div>
+          <ListHeader>
+            <span>Done</span>
+            <span>Type</span>
+            <span>Value</span>
+            <span>Duration</span>
+            <span>Actions</span>
+          </ListHeader>
           <div>
             {!loading ? (
               <ul>

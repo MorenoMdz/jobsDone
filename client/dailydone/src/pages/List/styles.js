@@ -9,6 +9,32 @@ export const Container = styled.div`
   padding: 10px 12px;
   background: #333;
   height: 90vh;
+
+  .teal-btn {
+    background-color: teal;
+    color: #fff;
+    padding: 3px 10px;
+  }
+`;
+
+export const ListHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0px;
+  margin: 10px 0;
+  text-align: center;
+
+  span {
+    padding: 3px;
+    margin: 0 5px;
+    min-width: 100px;
+    max-width: 200px;
+    background: #555;
+  }
+
+  span:first-child {
+    min-width: 200px;
+  }
 `;
 
 export const TasksList = styled.div`
@@ -19,6 +45,11 @@ export const TasksList = styled.div`
     flex-direction: row;
     list-style: none;
     padding: 5px 0;
+    opacity: 0.8;
+
+    :nth-child(even) {
+      background-color: #444;
+    }
 
     span {
       padding: 3px;
@@ -43,12 +74,24 @@ export const TasksList = styled.div`
 
     button {
       display: none;
-      padding: 0 10px;
-      margin: 0 5px;
+      padding: 3px 10px;
+      margin: 0 3px;
       border-radius: 2px;
+      font-weight: bold;
+    }
+    .edit-btn {
+      color: #fff;
+      background-color: #00b8ff;
+      margin-left: 5px;
+    }
+
+    .remove-btn {
+      color: #fff;
+      background-color: #bd00ff;
     }
 
     :hover {
+      opacity: 1;
       button {
         display: inline;
       }
@@ -62,6 +105,7 @@ export const FormBox = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 5px;
+  margin: 0 10px;
   background-color: transparent;
 
   button {

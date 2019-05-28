@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding: 10px 12px;
-  background: teal;
+  /* background: teal; */
 
   .selected {
     color: #fff;

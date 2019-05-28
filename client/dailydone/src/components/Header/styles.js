@@ -6,7 +6,11 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0),
+    rgba(0, 80, 80, 0.6)
+  );
   border-bottom: 2px solid white;
 `;
 
