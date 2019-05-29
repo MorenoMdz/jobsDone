@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import api from '../../services/api';
 import { Form } from '@rocketseat/unform';
 
+import ConfirmButton from '../../components/ConfirmButton';
+
 import { Container, FormBox, FormInput, ListHeader, TasksList } from './styles';
 
 class List extends Component {
@@ -66,14 +68,15 @@ class List extends Component {
           >
             edit
           </button>
-          <button
+          <ConfirmButton
             className="remove-btn"
-            onClick={() => {
+            dialog={['X', 'confirm']}
+            action={() => {
               this.removeItem(item.id);
             }}
           >
             x
-          </button>
+          </ConfirmButton>
         </div>
       </li>
     );
@@ -115,14 +118,18 @@ class List extends Component {
           </ListHeader>
           <div>
             {!loading ? (
-              <ul>
-                {list &&
-                  list.map(item =>
-                    item.id !== editingItemId
-                      ? displayItem(item)
-                      : editItem(item)
-                  )}
-              </ul>
+              list.length > 0 ? (
+                <ul>
+                  {list &&
+                    list.map(item =>
+                      item.id !== editingItemId
+                        ? displayItem(item)
+                        : editItem(item)
+                    )}
+                </ul>
+              ) : (
+                <div className="nothing-box">Nothing??</div>
+              )
             ) : (
               <p>loading...</p>
             )}

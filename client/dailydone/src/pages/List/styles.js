@@ -40,6 +40,13 @@ export const ListHeader = styled.div`
 export const TasksList = styled.div`
   padding: 0 20px;
 
+  .nothing-box {
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   li {
     display: flex;
     flex-direction: row;
