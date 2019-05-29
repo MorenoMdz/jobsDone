@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: flex-start;
   padding: 10px 12px;
   background: #333;
-  height: 90vh;
+  height: 85vh;
 
   .teal-btn {
     background-color: teal;
@@ -136,5 +136,4 @@ export const FormInput = styled(Input)`
   margin: 0 2px;
   text-align: center;
   padding: 5px;
-  text-transform: capitalize;
 `;

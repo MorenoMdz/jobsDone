@@ -9,6 +9,7 @@ class List extends Component {
     list: [],
     flash: '',
     error: '',
+    editingItemId: '',
     loading: true,
   };
 
@@ -18,7 +19,7 @@ class List extends Component {
 
   updateList = async () => {
     const response = await api.get('completed');
-    this.setState({ list: response.data, loading: false });
+    this.setState({ list: response.data, loading: false, editingItemId: '' });
   };
 
   removeItem = async id => {
@@ -27,12 +28,13 @@ class List extends Component {
     this.updateList();
   };
 
-  editItem = async id => {
-    const { list } = this.state;
-    const editItemState = list.map(item =>
-      item.id === id ? { ...item, editable: true } : item
-    );
-    this.setState({ ...this.state, loading: false, list: editItemState });
+  editItem = id => {
+    this.setState({ loading: false, editingItemId: id });
+  };
+
+  handleUpdate = async (data, { resetForm }) => {
+    await api.put(`completed/${data.id}`, { ...data });
+    this.updateList();
   };
 
   handleSubmit = async (data, { resetForm }) => {
@@ -45,13 +47,8 @@ class List extends Component {
     this.updateList();
   };
 
-  handleUpdate = async (data, { resetForm }) => {
-    await api.put(`completed/${data.id}`, { ...data });
-    this.updateList();
-  };
-
   render() {
-    const { list, flash, loading } = this.state;
+    const { list, flash, loading, editingItemId } = this.state;
 
     const displayItem = item => (
       <li key={item.id}>
@@ -84,7 +81,7 @@ class List extends Component {
     const editItem = item => (
       <li key={item.id}>
         <Form onSubmit={this.handleUpdate}>
-          {/* <FormInput type="hidden" name="id" value={item.id} /> */}
+          <FormInput type="hidden" name="id" value={item.id} />
           <FormInput type="text" name="text" placeholder={item.text} />
           <FormInput type="text" name="type" placeholder={item.type} />
           <FormInput type="text" name="value" placeholder={item.value} />
@@ -101,11 +98,10 @@ class List extends Component {
         <p>{flash && flash}</p>
         <FormBox>
           <Form onSubmit={this.handleSubmit}>
-            {/* <FormInput type="number" name="id" placeholder="id toremove" /> */}
-            <FormInput type="text" name="text" placeholder="text" />
-            <FormInput type="text" name="type" placeholder="type" />
-            <FormInput type="text" name="value" placeholder="value" />
-            <FormInput type="text" name="duration" placeholder="duration" />
+            <FormInput type="text" name="text" placeholder="Text" />
+            <FormInput type="text" name="type" placeholder="Type" />
+            <FormInput type="text" name="value" placeholder="Value" />
+            <FormInput type="text" name="duration" placeholder="Duration" />
             <button type="submit">Save</button>
           </Form>
         </FormBox>
@@ -122,7 +118,9 @@ class List extends Component {
               <ul>
                 {list &&
                   list.map(item =>
-                    !item.editable ? displayItem(item) : editItem(item)
+                    item.id !== editingItemId
+                      ? displayItem(item)
+                      : editItem(item)
                   )}
               </ul>
             ) : (
