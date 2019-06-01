@@ -1,14 +1,17 @@
 import React from 'react';
-import { Container } from './styles';
+import { Container, MetaBar, OverlapBar } from './styles';
 
-export default function Footer() {
+export default function Footer(props) {
+  const percent = Math.floor((props.total * 100) / 1000);
+  const percentWidth = 500 - Math.floor((percent * 500) / 100);
+  console.log(percentWidth);
   return (
     <Container>
-      <h3>Footer</h3>
-      <span>
-        || TODO COR if under daily meta 30% red 30-60% yellow 60-90% green 100%
-        blue||
-      </span>
+      <div>
+        <span>total: {props.total}</span>
+        <MetaBar className="meta-bar" />
+        <OverlapBar className="overlap-bar" width={(percentWidth > 0 && percentWidth) || 0} />
+      </div>
     </Container>
   );
 }
