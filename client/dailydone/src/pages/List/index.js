@@ -44,7 +44,8 @@ class List extends Component {
     this.setState({ loading: false, editingItemId: id });
   };
 
-  handleUpdate = async (data, { resetForm }) => {
+  handleUpdate = async data => {
+    this.setState({ loading: true });
     await api.put(`completed/${data.id}`, { ...data });
     this.updateList();
   };
@@ -94,16 +95,18 @@ class List extends Component {
 
     const editItem = item => (
       <li key={item.id}>
-        <Form onSubmit={this.handleUpdate} initialData={{ ...item }}>
-          <FormInput type="hidden" name="id" value={item.id} />
-          <FormInput type="text" name="text" placeholder={item.text || 'text'} />
-          <FormInput type="text" name="type" placeholder={item.type || 'type'} />
-          <FormInput type="text" name="value" placeholder={item.value || 'value'} />
-          <FormInput type="text" name="duration" placeholder={item.duration || 'duration'} />
-          <button type="submit" className="teal-btn">
-            Update
-          </button>
-        </Form>
+        <FormBox>
+          <Form onSubmit={this.handleUpdate} initialData={{ ...item }}>
+            <FormInput type="hidden" name="id" /* value={item.id} */ />
+            <FormInput type="text" name="text" placeholder={item.text || 'text'} />
+            <FormInput type="text" name="type" placeholder={item.type || 'type'} />
+            <FormInput type="text" name="value" placeholder={item.value || 'value'} />
+            <FormInput type="text" name="duration" placeholder={item.duration || 'duration'} />
+            <button type="submit" className="teal-btn">
+              Update
+            </button>
+          </Form>
+        </FormBox>
       </li>
     );
 
@@ -114,10 +117,10 @@ class List extends Component {
           <p>{flash && flash}</p>
           <FormBox>
             <Form onSubmit={this.handleSubmit}>
-              <FormInput type="text" name="text" placeholder="Text" />
-              <FormInput type="text" name="type" placeholder="Type" />
-              <FormInput type="text" name="value" placeholder="Value" />
-              <FormInput type="text" name="duration" placeholder="Duration" />
+              <FormInput type="text" name="text" placeholder="Text" required />
+              <FormInput type="text" name="type" placeholder="Type" required />
+              <FormInput type="text" name="value" placeholder="Value" required />
+              <FormInput type="text" name="duration" placeholder="Duration" required />
               <button type="submit">Save</button>
             </Form>
           </FormBox>

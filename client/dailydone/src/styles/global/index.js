@@ -7,13 +7,13 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
+  html, body {
     color: #FFF;
     background: #222;
     font-family:Helvetica;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
-    height: 100vh;
+    height: 100%;
   }
 `;
 

@@ -8,7 +8,8 @@ export const Container = styled.div`
   justify-content: flex-start;
   padding: 10px 12px;
   background: #333;
-  height: 85vh;
+  flex: 1;
+  min-height: calc(100vh - 150px);
 
   .teal-btn {
     background-color: teal;
@@ -118,8 +119,6 @@ export const FormBox = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 5px;
-  margin: 0 10px;
-  width: 80%;
   background-color: transparent;
 
   form {
@@ -141,6 +140,7 @@ export const FormBox = styled.div`
   input {
     padding: 3px;
     margin: 0 5px;
+    outline: none;
   }
 
   [name='text'] {
@@ -151,6 +151,14 @@ export const FormBox = styled.div`
   [name='value'],
   [name='duration'] {
     width: 123px;
+  }
+
+  input:required:focus {
+    border: 1px solid teal;
+    outline: none;
+  }
+  input:required:hover {
+    opacity: 1;
   }
 `;
 
