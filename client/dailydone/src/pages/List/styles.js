@@ -153,6 +153,9 @@ export const FormBox = styled.div`
     width: 123px;
   }
 
+  input:invalid {
+    background: #ccc;
+  }
   input:required:focus {
     border: 1px solid teal;
     outline: none;

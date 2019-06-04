@@ -6,7 +6,7 @@ import ConfirmButton from '../../components/ConfirmButton';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-import { Container, FormBox, FormInput, ListHeader, TasksList } from './styles';
+import { Container, FormBox, FormInput, TasksList } from './styles';
 
 class List extends Component {
   state = {
@@ -100,8 +100,8 @@ class List extends Component {
             <FormInput type="hidden" name="id" /* value={item.id} */ />
             <FormInput type="text" name="text" placeholder={item.text || 'text'} />
             <FormInput type="text" name="type" placeholder={item.type || 'type'} />
-            <FormInput type="text" name="value" placeholder={item.value || 'value'} />
-            <FormInput type="text" name="duration" placeholder={item.duration || 'duration'} />
+            <FormInput type="number" name="value" placeholder={item.value || 'value'} />
+            <FormInput type="number" name="duration" placeholder={item.duration || 'duration'} />
             <button type="submit" className="teal-btn">
               Update
             </button>
@@ -119,19 +119,12 @@ class List extends Component {
             <Form onSubmit={this.handleSubmit}>
               <FormInput type="text" name="text" placeholder="Text" required />
               <FormInput type="text" name="type" placeholder="Type" required />
-              <FormInput type="text" name="value" placeholder="Value" required />
-              <FormInput type="text" name="duration" placeholder="Duration" required />
+              <FormInput type="number" name="value" placeholder="Value" required />
+              <FormInput type="number" name="duration" placeholder="Duration" required />
               <button type="submit">Save</button>
             </Form>
           </FormBox>
           <TasksList>
-            {/* <ListHeader>
-            <span>Done</span>
-            <span>Type</span>
-            <span>Value</span>
-            <span>Duration</span>
-            <span>Actions</span>
-          </ListHeader> */}
             <div>
               {!loading ? (
                 list.length > 0 ? (
