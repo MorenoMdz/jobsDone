@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   flex: 1;
-  background: #333;
-  min-height: calc(100vh - 150px);
+  /* background: #333; */
+
+  /* min-height: calc(100vh - 150px); */
 
   .nothing-box {
     height: 15vh;

@@ -110,54 +110,48 @@ class Config extends Component {
     };
 
     return (
-      <Fragment>
-        <Header />
-        <Container>
-          <h3>Your app configuration</h3>
-          <FormBox>
-            <Form onSubmit={this.handleSubmit} initialData={initialData}>
-              <div>
-                <label htmlFor="meta">Daily Meta (in {currency})</label>
-                <Input type="number" name="daily-meta" placeholder="1000" className="meta" />
-              </div>
-              <div>
-                <label htmlFor="currency">Currency</label>
-                <Input type="text" name="currency" placeholder="$" className="currency" required />
-              </div>
-              <div className="save-btn">
-                <button type="submit" className="teal-btn">
-                  Save
-                </button>
-              </div>
-            </Form>
-          </FormBox>
-
-          <TypesBox>
-            <h4>Types</h4>
+      <Container>
+        <h3>Your app configuration</h3>
+        <FormBox>
+          <Form onSubmit={this.handleSubmit} initialData={initialData}>
             <div>
-              {!loading ? (
-                types.length > 0 ? (
-                  <ul>
-                    {types && types.map(type => (type.id !== editingTypeId ? displayType(type) : editType(type)))}
-                  </ul>
-                ) : (
-                  <div className="nothing-box">Nothing??</div>
-                )
-              ) : (
-                <p>loading...</p>
-              )}
-              <Form onSubmit={this.addType}>
-                <label htmlFor="title">New Type</label>
-                <Input type="text" name="title" /* id="title" */ placeholder={'Type Title'} />
-                <button type="submit" className="teal-btn">
-                  Add
-                </button>
-              </Form>
+              <label htmlFor="meta">Daily Meta (in {currency})</label>
+              <Input type="number" name="daily-meta" placeholder="1000" className="meta" />
             </div>
-          </TypesBox>
-        </Container>
-        <Footer />
-      </Fragment>
+            <div>
+              <label htmlFor="currency">Currency</label>
+              <Input type="text" name="currency" placeholder="$" className="currency" required />
+            </div>
+            <div className="save-btn">
+              <button type="submit" className="teal-btn">
+                Save
+              </button>
+            </div>
+          </Form>
+        </FormBox>
+
+        <TypesBox>
+          <h4>Types</h4>
+          <div>
+            {!loading ? (
+              types.length > 0 ? (
+                <ul>{types && types.map(type => (type.id !== editingTypeId ? displayType(type) : editType(type)))}</ul>
+              ) : (
+                <div className="nothing-box">Nothing??</div>
+              )
+            ) : (
+              <p>loading...</p>
+            )}
+            <Form onSubmit={this.addType}>
+              <label htmlFor="title">New Type</label>
+              <Input type="text" name="title" /* id="title" */ placeholder={'Type Title'} />
+              <button type="submit" className="teal-btn">
+                Add
+              </button>
+            </Form>
+          </div>
+        </TypesBox>
+      </Container>
     );
   }
 }

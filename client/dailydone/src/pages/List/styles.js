@@ -18,29 +18,30 @@ export const Container = styled.div`
   }
 `;
 
-export const ListHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 5px 0px;
-  margin: 10px 0;
-  text-align: center;
-  width: 1024px;
-  /* background: orange; */
+// export const ListHeader = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   padding: 5px 0px;
+//   margin: 10px 0;
+//   text-align: center;
+//   width: 1024px;
+//   /* background: orange; */
 
-  span:first-child {
-    width: 475px;
-  }
-  span {
-    padding: 3px;
-    margin: 0 5px;
-    width: 123px;
-    background: #555;
-  }
-`;
+//   span:first-child {
+//     width: 475px;
+//   }
+//   span {
+//     padding: 3px;
+//     margin: 0 5px;
+//     width: 123px;
+//     background: #555;
+//   }
+// `;
 
 export const TasksList = styled.div`
   /* padding: 0 20px; */
   width: 1024px;
+  z-index: 0.5;
 
   .nothing-box {
     height: 15vh;

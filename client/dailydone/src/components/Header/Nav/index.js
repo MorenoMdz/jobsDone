@@ -1,18 +1,30 @@
 import React from 'react';
-import { Container, Navigation } from './styles';
+
+import Config from '../../../pages/Config';
+
+import { Container, ConfigBox, Navigation, Button } from './styles';
 
 export default function Nav() {
+  const toggleConfig = () => {
+    document.getElementById('config-box').classList.toggle('active');
+    // console.log(btn);
+  };
+
   return (
     <Container>
       <Navigation activeClassName="selected" to="/today">
-        Diário
+        Today
       </Navigation>
       <Navigation activeClassName="selected" to="/week">
-        Semanal
+        Week
       </Navigation>
       <Navigation activeClassName="selected" to="/month">
-        Mensal
+        Month
       </Navigation>
+      <Button onClick={toggleConfig}>&#9881;</Button>
+      <ConfigBox id="config-box">
+        <Config />
+      </ConfigBox>
     </Container>
   );
 }
