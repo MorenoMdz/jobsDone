@@ -3,12 +3,19 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 10px;
   background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(0, 80, 80, 0.6));
   border-bottom: 2px solid white;
   height: 70px;
+
+  /* @media (min-width: 1065px) {
+    padding: 0 145px;
+  }
+  @media (min-width: 768px) {
+    padding: 0 175px;
+  } */
 `;
 
 export const NavLink = styled(Link)`

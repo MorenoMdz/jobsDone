@@ -1,32 +1,61 @@
 {
+  "types": [
+    {
+      "title": "Reparo",
+      "id": 1
+    },
+    {
+      "title": "Garantiaz",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "title": "Orçamento"
+    },
+    {
+      "id": 4,
+      "title": "Cortesia"
+    },
+    {
+      "title": "Venda",
+      "id": 5
+    }
+  ],
   "completed": [
     {
       "id": 216,
       "text": "Ps3 hdmi osxxx",
-      "type": "Test",
-      "value": "0",
+      "type": "",
+      "value": "1",
       "duration": "60"
     },
     {
+      "id": 781,
       "text": "Incomodei a Julia",
-      "type": "Fun",
       "value": "250",
       "duration": "30",
-      "id": 781
+      "typeId": 2
     },
     {
+      "id": 95,
       "text": "Incomodei o Raul",
-      "type": "Fun",
       "value": "250",
       "duration": "30",
-      "id": 95
+      "typeId": 2
     },
     {
       "id": 448,
       "text": "Incomodei a Mãe",
-      "type": "Fun",
       "value": "500",
-      "duration": "30"
+      "duration": "30",
+      "typeId": 1
+    }
+  ],
+  "users": [
+    {
+      "dailyMeta": "1000",
+      "currency": "$",
+      "id": 1
     }
   ]
 }

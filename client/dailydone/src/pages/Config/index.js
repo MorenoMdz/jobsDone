@@ -1,39 +1,41 @@
-import React, { Component, Fragment } from 'react';
-import { Form, Input, Select } from '@rocketseat/unform';
+import React, { Component } from 'react';
+import api from '../../services/api';
+import { Form, Input } from '@rocketseat/unform';
 
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import ConfirmButton from '../../components/ConfirmButton';
 
 import { Container, FormBox, TypesBox } from './styles';
 
 class Config extends Component {
   state = {
-    types: [
-      { id: 'repair', title: 'Reparo' },
-      { id: 'warranty', title: 'Garantia' },
-      { id: 'eval', title: 'Orçamento' },
-      { id: 'courtesy', title: 'Cortesia' },
-      { id: 'sale', title: 'Venda' },
-    ],
-    currency: '$',
+    types: [],
+    currency: '',
     dailyMeta: '',
-    editingTypeId: '',
+    editingTypeId: undefined,
+    loading: true,
   };
 
-  componentDidMount() {
-    this.updateList();
+  async componentDidMount() {
+    await this.updateList();
   }
 
   updateList = async () => {
-    // const response = await api.get('completed');
-    // this.setState({ list: response.data, loading: false, editingItemId: '' });
+    const types = await api.get('types');
+    const settings = await api.get('users/1');
+    const { dailyMeta, currency } = settings.data;
+    this.setState({
+      types: types.data,
+      dailyMeta,
+      currency,
+      loading: false,
+      editingTypeId: undefined,
+    });
   };
 
   removeItem = async id => {
     this.setState({ loading: true });
-    // await api.delete(`completed/${id}`);
-    // this.updateList();
+    await api.delete(`types/${id}`);
+    this.updateList();
   };
 
   editItem = id => {
@@ -42,28 +44,29 @@ class Config extends Component {
 
   handleUpdate = async data => {
     this.setState({ loading: true });
-    // await api.put(`completed/${data.id}`, { ...data });
-    // this.updateList();
+    await api.put(`types/${data.id}`, { title: data.title });
+    this.updateList();
   };
 
-  handleSubmit = e => {
-    // this.setState({ types: e.types });
-    console.log(e.currency);
+  handleSubmit = async ({ dailyMeta, currency }) => {
+    await api.put(`users/1`, { dailyMeta, currency });
+    this.updateList();
   };
 
-  addType = e => {
-    // check if empty
+  addType = async (e, { resetForm }) => {
     let input = document.getElementById('title');
     if (!e.title) {
       input.classList.add('invalid');
     } else {
       input.classList.remove('invalid');
     }
-    console.log(input);
+    await api.post(`types`, { title: e.title });
+    this.updateList();
+    resetForm();
   };
 
   render() {
-    const { currency, types, loading, editingTypeId } = this.state;
+    const { currency, dailyMeta, types, loading, editingTypeId } = this.state;
 
     const displayType = type => (
       <li key={type.id}>
@@ -94,8 +97,8 @@ class Config extends Component {
       <li key={type.id}>
         <FormBox>
           <Form onSubmit={this.handleUpdate} initialData={{ ...type }}>
-            <Input type="hidden" name="id" /* value={type.id} */ />
-            <Input type="text" name="type-title" placeholder={type.text || 'text'} />
+            <Input type="hidden" name="id" />
+            <Input type="text" name="title" placeholder={type.text || 'text'} />
             <button type="submit" className="teal-btn">
               Update
             </button>
@@ -105,8 +108,8 @@ class Config extends Component {
     );
 
     const initialData = {
-      meta: 500,
-      currency: '$',
+      dailyMeta: dailyMeta,
+      currency: currency,
     };
 
     return (
@@ -116,7 +119,7 @@ class Config extends Component {
           <Form onSubmit={this.handleSubmit} initialData={initialData}>
             <div>
               <label htmlFor="meta">Daily Meta (in {currency})</label>
-              <Input type="number" name="daily-meta" placeholder="1000" className="meta" />
+              <Input type="number" name="dailyMeta" placeholder="1000" className="meta" />
             </div>
             <div>
               <label htmlFor="currency">Currency</label>
@@ -156,7 +159,7 @@ class Config extends Component {
   }
 }
 
-// TODO menu overlay
-// TODO styles for type edit
+// TODO type edit cancel btn
+// TODO config api calls
 
 export default Config;

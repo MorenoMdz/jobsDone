@@ -118,7 +118,6 @@ export const TypesBox = styled.div`
     }
 
     button {
-      display: none;
       width: 50px;
       padding: 3px 10px;
       margin: 0 3px;
@@ -130,12 +129,14 @@ export const TypesBox = styled.div`
       color: #fff;
       background-color: #00b8ff;
       margin-left: 5px;
+      display: none;
     }
 
     .remove-btn {
       color: #fff;
       background-color: #bd00ff;
       margin-left: 5px;
+      display: none;
     }
 
     [level='1'] {

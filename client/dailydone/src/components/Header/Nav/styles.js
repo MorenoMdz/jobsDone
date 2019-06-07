@@ -7,6 +7,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding: 10px 12px;
+  box-sizing: border-box;
+
   /* background: teal; */
 
   .selected {
