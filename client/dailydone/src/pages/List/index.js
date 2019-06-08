@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import api from '../../services/api';
-import { Form } from '@rocketseat/unform';
+import { Form, Select } from '@rocketseat/unform';
 
 import ConfirmButton from '../../components/ConfirmButton';
 import Header from '../../components/Header';
@@ -11,6 +11,7 @@ import { Container, FormBox, FormInput, TasksList } from './styles';
 class List extends Component {
   state = {
     list: [],
+    types: [],
     total: '',
     flash: '',
     error: '',
@@ -19,13 +20,22 @@ class List extends Component {
   };
 
   componentDidMount() {
+    this.fetchTypes();
     this.updateList();
   }
 
   updateList = async () => {
-    const response = await api.get('completed');
-    this.setState({ list: response.data, loading: false, editingItemId: '' });
+    const response = await api.get('completed?_expand=type');
+    console.log(response);
+    const flatList = response.data.map(item => ({ ...item, type: item.type.title }));
+    console.log('flatlist: ', flatList);
+    this.setState({ list: flatList, loading: false, editingItemId: '' });
     this.getTotal();
+  };
+
+  fetchTypes = async () => {
+    const response = await api.get('types');
+    this.setState({ types: response.data, loading: false });
   };
 
   getTotal = () => {
@@ -62,7 +72,7 @@ class List extends Component {
   };
 
   render() {
-    const { list, flash, loading, editingItemId, total } = this.state;
+    const { list, types, flash, loading, editingItemId, total } = this.state;
 
     const displayItem = item => (
       <li key={item.id}>
@@ -97,9 +107,9 @@ class List extends Component {
       <li key={item.id}>
         <FormBox>
           <Form onSubmit={this.handleUpdate} initialData={{ ...item }}>
-            <FormInput type="hidden" name="id" /* value={item.id} */ />
+            <FormInput type="hidden" name="id" />
             <FormInput type="text" name="text" placeholder={item.text || 'text'} />
-            <FormInput type="text" name="type" placeholder={item.type || 'type'} />
+            <Select name="typeId" options={types} required />
             <FormInput type="number" name="value" placeholder={item.value || 'value'} />
             <FormInput type="number" name="duration" placeholder={item.duration || 'duration'} />
             <button type="submit" className="teal-btn">
@@ -118,7 +128,8 @@ class List extends Component {
           <FormBox>
             <Form onSubmit={this.handleSubmit}>
               <FormInput type="text" name="text" placeholder="Text" required />
-              <FormInput type="text" name="type" placeholder="Type" required />
+              {/* <FormInput type="text" name="type" placeholder="Type" required /> */}
+              <Select name="typeId" options={types} required />
               <FormInput type="number" name="value" placeholder="Value" required />
               <FormInput type="number" name="duration" placeholder="Duration" required />
               <button type="submit">Save</button>

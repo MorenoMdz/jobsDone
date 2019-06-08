@@ -5,7 +5,7 @@
       "id": 1
     },
     {
-      "title": "Garantiaz",
+      "title": "Garantia",
       "id": 2
     },
     {
@@ -25,7 +25,7 @@
     {
       "id": 216,
       "text": "Ps3 hdmi osxxx",
-      "type": "",
+      "typeId": "1",
       "value": "1",
       "duration": "60"
     },
@@ -49,6 +49,48 @@
       "value": "500",
       "duration": "30",
       "typeId": 1
+    },
+    {
+      "text": "1",
+      "typeId": "3",
+      "value": "1",
+      "duration": "1",
+      "id": 346
+    },
+    {
+      "text": "2",
+      "typeId": "3",
+      "value": "2",
+      "duration": "2",
+      "id": 600
+    },
+    {
+      "text": "Teste",
+      "typeId": "1",
+      "value": "200",
+      "duration": "60",
+      "id": 886
+    },
+    {
+      "text": "2",
+      "typeId": "5",
+      "value": "2",
+      "duration": "2",
+      "id": 731
+    },
+    {
+      "text": "2",
+      "typeId": "2",
+      "value": "2",
+      "duration": "2",
+      "id": 415
+    },
+    {
+      "text": "1",
+      "typeId": "1",
+      "value": "1",
+      "duration": "1",
+      "id": 37
     }
   ],
   "users": [
