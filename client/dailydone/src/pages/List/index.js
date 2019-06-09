@@ -6,12 +6,13 @@ import ConfirmButton from '../../components/ConfirmButton';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-import { Container, FormBox, FormInput, TasksList } from './styles';
+import { Container, FormBox, FormInput, FormSelect, TasksList } from './styles';
 
 class List extends Component {
   state = {
     list: [],
     types: [],
+    meta: '',
     total: '',
     flash: '',
     error: '',
@@ -26,11 +27,10 @@ class List extends Component {
 
   updateList = async () => {
     const response = await api.get('completed?_expand=type');
-    console.log(response);
     const flatList = response.data.map(item => ({ ...item, type: item.type.title }));
-    console.log('flatlist: ', flatList);
     this.setState({ list: flatList, loading: false, editingItemId: '' });
     this.getTotal();
+    this.getConfig();
   };
 
   fetchTypes = async () => {
@@ -41,7 +41,13 @@ class List extends Component {
   getTotal = () => {
     const { list } = this.state;
     let total = list.map(item => parseInt(item.value)).reduce((a, b) => a + b, 0);
-    this.setState({ total });
+    this.setState({ total: parseInt(total).toFixed(2) });
+  };
+
+  getConfig = async () => {
+    const response = await api.get('users/1');
+    const { dailyMeta, currency } = response.data;
+    this.setState({ dailyMeta, currency });
   };
 
   removeItem = async id => {
@@ -72,7 +78,7 @@ class List extends Component {
   };
 
   render() {
-    const { list, types, flash, loading, editingItemId, total } = this.state;
+    const { list, types, currency, meta, flash, loading, editingItemId, total } = this.state;
 
     const displayItem = item => (
       <li key={item.id}>
@@ -80,8 +86,8 @@ class List extends Component {
         <span className="type">{item.type}</span>
         <span className="value">{item.value}</span>
         <span className="duration">{item.duration}</span>
-        {`>`}
-        <div>
+
+        <div className="btn-box">
           <button
             className="edit-btn"
             onClick={() => {
@@ -109,10 +115,10 @@ class List extends Component {
           <Form onSubmit={this.handleUpdate} initialData={{ ...item }}>
             <FormInput type="hidden" name="id" />
             <FormInput type="text" name="text" placeholder={item.text || 'text'} />
-            <Select name="typeId" options={types} required />
+            <FormSelect name="typeId" options={types} required />
             <FormInput type="number" name="value" placeholder={item.value || 'value'} />
             <FormInput type="number" name="duration" placeholder={item.duration || 'duration'} />
-            <button type="submit" className="teal-btn">
+            <button type="submit" className="save-btn">
               Update
             </button>
           </Form>
@@ -122,14 +128,14 @@ class List extends Component {
 
     return (
       <Fragment>
-        <Header total={total} />
+        <Header />
         <Container>
           <p>{flash && flash}</p>
           <FormBox>
             <Form onSubmit={this.handleSubmit}>
               <FormInput type="text" name="text" placeholder="Text" required />
               {/* <FormInput type="text" name="type" placeholder="Type" required /> */}
-              <Select name="typeId" options={types} required />
+              <FormSelect name="typeId" options={types} required />
               <FormInput type="number" name="value" placeholder="Value" required />
               <FormInput type="number" name="duration" placeholder="Duration" required />
               <button type="submit">Save</button>
@@ -149,7 +155,7 @@ class List extends Component {
             </div>
           </TasksList>
         </Container>
-        <Footer total={total} />
+        <Footer total={total} meta={meta} currency={currency} />
       </Fragment>
     );
   }

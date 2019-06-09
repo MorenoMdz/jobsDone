@@ -1,13 +1,12 @@
 import React from 'react';
 
-import Config from '../../../pages/Config';
+import Config from '../../Config';
 
 import { Container, ConfigBox, Navigation, Button } from './styles';
 
 export default function Nav() {
   const toggleConfig = () => {
     document.getElementById('config-box').classList.toggle('active');
-    // console.log(btn);
   };
 
   return (

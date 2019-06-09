@@ -51,6 +51,7 @@ class Config extends Component {
   handleSubmit = async ({ dailyMeta, currency }) => {
     await api.put(`users/1`, { dailyMeta, currency });
     this.updateList();
+    window.location.reload();
   };
 
   addType = async (e, { resetForm }) => {

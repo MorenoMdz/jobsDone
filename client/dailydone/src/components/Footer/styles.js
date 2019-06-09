@@ -16,6 +16,7 @@ export const Container = styled.div`
     text-transform: capitalize;
     color: #fff;
     z-index: 2;
+    direction: ltr;
   }
   div {
     direction: rtl;

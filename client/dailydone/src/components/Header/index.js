@@ -9,6 +9,7 @@ export default function Header() {
       <NavLink to="/">
         <h3>DailyDone</h3>
       </NavLink>
+      TODO dropdown for days, weeks, months || Login page
       <Nav />
     </Container>
   );
