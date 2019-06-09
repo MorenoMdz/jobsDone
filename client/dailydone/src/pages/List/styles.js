@@ -12,8 +12,10 @@ export const Container = styled.div`
   min-height: calc(100vh - 150px);
 
   .teal-btn {
-    background-color: teal;
-    color: #fff;
+    color: #ddd;
+    font-weight: bold;
+    border: 3px #1c6a6c solid;
+    background-color: #11464e;
     padding: 3px 10px;
   }
 
@@ -26,8 +28,6 @@ export const Container = styled.div`
 `;
 
 export const TasksList = styled.div`
-  /* width: 1024px; */
-
   .nothing-box {
     height: 15vh;
     display: flex;
@@ -119,13 +119,18 @@ export const FormBox = styled.div`
 
   button {
     color: #fff;
-    background-color: teal;
+    font-weight: bold;
+    border: 3px #1c6a6c solid;
+    background-color: #11464e;
     padding: 5px;
     margin: 0 5px;
     width: 100px;
     font-weight: bold;
-    box-shadow: 1px 1px 1px #555;
     cursor: pointer;
+
+    :hover {
+      opacity: 0.9;
+    }
   }
 
   input {

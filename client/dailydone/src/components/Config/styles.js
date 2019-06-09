@@ -17,12 +17,18 @@ export const Container = styled.div`
   }
 
   .teal-btn {
-    background-color: teal;
-    color: #fff;
+    color: #ddd;
     font-weight: bold;
+    border: 3px #1c6a6c solid;
+    background-color: #11464e;
     padding: 3px 10px;
     margin-right: 5px;
     width: 70px;
+    cursor: pointer;
+
+    :hover {
+      opacity: 0.8;
+    }
     /* flex: 2; */
   }
 
@@ -123,6 +129,7 @@ export const TypesBox = styled.div`
       margin: 0 3px;
       border-radius: 2px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .edit-btn {

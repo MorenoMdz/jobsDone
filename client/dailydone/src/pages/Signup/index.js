@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Container, FormBox, FormInput, LinkBox } from './styles';
 
-export default function Login() {
+export default function Signup() {
   return (
     <Container>
       <div className="logo">
@@ -13,15 +13,14 @@ export default function Login() {
       <Form>
         <FormBox>
           <FormInput type="text" name="username" placeholder="Username" />
+          <FormInput type="text" name="email" placeholder="Email" />
           <FormInput type="password" name="password" placeholder="Password" />
-          {/* TODO login logic */}
-          <Link to="/today">
-            <button type="submit">Login</button>
-          </Link>
+          <FormInput type="password" name="password-confirmation" placeholder="Confirm your password" />
+          <button type="submit">Register</button>
         </FormBox>
       </Form>
       <LinkBox>
-        <Link to="/signup">Register</Link>
+        <Link to="/">Login</Link>
       </LinkBox>
     </Container>
   );
