@@ -84,7 +84,8 @@ export const TasksList = styled.div`
 
     .remove-btn {
       color: #fff;
-      background-color: #bd00ff;
+      background-color: #d900ff;
+      /* background-color: #bd00ff; */
       margin-left: 3px;
       text-align: center;
       width: 30px;

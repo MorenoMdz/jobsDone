@@ -9,15 +9,12 @@ export const Container = styled.div`
   padding: 10px 12px;
   box-sizing: border-box;
 
-  /* background: teal; */
-
-  .selected {
-    color: #fff;
-    border-bottom: 1px solid #fff;
-  }
-
   .active {
     display: block;
+  }
+
+  .config {
+    font-size: 1.6rem;
   }
 `;
 
@@ -33,15 +30,23 @@ export const Navigation = styled(NavLink)`
 
 export const Button = styled.div`
   color: #fff;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   background-color: transparent;
   font-weight: bold;
   cursor: pointer;
   padding: 5px 10px;
-  border-bottom: 2px solid white;
 `;
 
 export const ConfigBox = styled.div`
+  position: absolute;
+  padding: 25px;
+  top: 70px;
+  background-color: #222;
+  display: none;
+  z-index: 1;
+`;
+
+export const DailyBox = styled.div`
   position: absolute;
   padding: 25px;
   top: 70px;

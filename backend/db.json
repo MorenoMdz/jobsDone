@@ -41,17 +41,17 @@
       "duration": "12"
     },
     {
-      "text": "Code",
-      "typeId": "6",
-      "value": "500",
-      "duration": "120",
-      "id": 3
+      "id": 125,
+      "text": "599",
+      "typeId": "2",
+      "value": "900",
+      "duration": "500"
     }
   ],
   "users": [
     {
-      "dailyMeta": "500",
-      "currency": "$",
+      "dailyMeta": "1000",
+      "currency": "R$",
       "id": 1
     }
   ]

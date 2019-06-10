@@ -78,7 +78,8 @@ class List extends Component {
   };
 
   render() {
-    const { list, types, currency, meta, flash, loading, editingItemId, total } = this.state;
+    const { list, types, currency, dailyMeta, flash, loading, editingItemId, total } = this.state;
+    console.log('meta: ', dailyMeta, 'total: ', total);
 
     const displayItem = item => (
       <li key={item.id}>
@@ -155,7 +156,7 @@ class List extends Component {
             </div>
           </TasksList>
         </Container>
-        <Footer total={total} meta={meta} currency={currency} />
+        <Footer total={total} meta={dailyMeta} currency={currency} />
       </Fragment>
     );
   }
