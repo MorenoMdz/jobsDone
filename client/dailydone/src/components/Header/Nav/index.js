@@ -2,35 +2,50 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Config from '../../Config';
+// import OutsideClickHandler from 'react-outside-click-handler';
 
-import { Container, ConfigBox, DailyBox, Navigation, Button } from './styles';
+import { Container, ModalBg, ConfigBox, DailyBox, Navigation, Button } from './styles';
 
 class Nav extends Component {
   state = {
-    // startDate: Date.now(),
     selectedDay: '',
+    showBox: '',
+  };
+
+  componentWillMount() {
+    document.addEventListener('mousedown', this.handleClick, false);
+  }
+
+  componentWillUnmount() {
+    document.addEventListener('mousedown', this.handleClick, false);
+  }
+
+  handleClick = e => {
+    if (this.node.contains(e.target)) {
+      return console.log('test');
+    }
+    this.setState({ showBox: '' });
+    console.log('outside');
   };
 
   toggleBox = boxName => {
-    document.getElementById(`${boxName}-box`).classList.toggle('active');
+    this.setState({ showBox: boxName });
   };
 
   handleChange = (e, type) => {
     console.log('e: ', e, 'type: ', type);
-    this.toggleBox(type);
-    // const selectedDay = e.
-    // this.setState({ selectedDay: e });
+    this.setState({ showBox: '' });
   };
 
   render() {
-    const { selectedDay } = this.state;
+    const { selectedDay, showBox } = this.state;
 
     return (
       <Container>
         <div>
           <span>{selectedDay}</span>
           <Button onClick={() => this.toggleBox('daily')}>Day</Button>
-          <DailyBox id="daily-box">
+          <DailyBox id="daily-box" ref={node => (this.node = node)} className={showBox === 'daily' && 'active'}>
             <DatePicker
               inline
               selected={new Date()}
@@ -45,7 +60,8 @@ class Nav extends Component {
         <Navigation to="/week">Week</Navigation>
         <div>
           <Button onClick={() => this.toggleBox('month')}>Month</Button>
-          <DailyBox id="month-box">
+
+          <DailyBox id="month-box" ref={node => (this.node = node)} className={showBox === 'month' && 'active'}>
             <DatePicker
               inline
               selected={this.state.startDate}
@@ -62,7 +78,8 @@ class Nav extends Component {
             &#9881;
           </Button>
         </div>
-        <ConfigBox id="config-box">
+
+        <ConfigBox id="config-box" ref={node => (this.node = node)} className={showBox === 'config' && 'active'}>
           <Config />
         </ConfigBox>
       </Container>
