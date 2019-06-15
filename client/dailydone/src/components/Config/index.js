@@ -64,6 +64,7 @@ class Config extends Component {
     await api.post(`types`, { title: e.title });
     this.updateList();
     resetForm();
+    window.location.reload();
   };
 
   render() {

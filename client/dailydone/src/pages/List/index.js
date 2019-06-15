@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import api from '../../services/api';
-import { Form, Select } from '@rocketseat/unform';
+import { Form } from '@rocketseat/unform';
+import { format, getDate, addDays } from 'date-fns';
 
 import ConfirmButton from '../../components/ConfirmButton';
 import Header from '../../components/Header';
@@ -18,6 +19,7 @@ class List extends Component {
     error: '',
     editingItemId: '',
     loading: true,
+    selectedDay: format(Date.now(), 'MM/DD/YYYY'),
   };
 
   componentDidMount() {
@@ -25,8 +27,17 @@ class List extends Component {
     this.updateList();
   }
 
+  setDay = async selectedDay => {
+    this.setState({ loading: true });
+    await this.setState({ selectedDay });
+    await this.updateList();
+    console.log('selectday', selectedDay); // TODO HERE
+  };
+
   updateList = async () => {
-    const response = await api.get('completed?_expand=type');
+    const { selectedDay } = this.state;
+    console.log('selectday updated', selectedDay);
+    const response = await api.get(`completed?date=${selectedDay}&_expand=type`);
     const flatList = response.data.map(item => ({ ...item, type: item.type.title }));
     this.setState({ list: flatList, loading: false, editingItemId: '' });
     this.getTotal();
@@ -68,9 +79,11 @@ class List extends Component {
 
   handleSubmit = async (data, { resetForm }) => {
     this.setState({ loading: true });
-    const id = Math.floor(Math.random() * 1000);
+    const id = Math.floor(Math.random() * 1000); //to be removed
+    const date = format(Date.now(), 'MM/DD/YYYY');
     await api.post(`completed/`, {
       ...data,
+      date,
       id,
     });
     this.updateList();
@@ -78,8 +91,7 @@ class List extends Component {
   };
 
   render() {
-    const { list, types, currency, dailyMeta, flash, loading, editingItemId, total } = this.state;
-    console.log('meta: ', dailyMeta, 'total: ', total);
+    const { list, types, currency, dailyMeta, selectedDay, flash, loading, editingItemId, total } = this.state;
 
     const displayItem = item => (
       <li key={item.id}>
@@ -129,9 +141,10 @@ class List extends Component {
 
     return (
       <Fragment>
-        <Header />
+        <Header setDay={this.setDay} />
         <Container>
           <p>{flash && flash}</p>
+          <p>{this.state.selectedDay}</p>
           <FormBox>
             <Form onSubmit={this.handleSubmit}>
               <FormInput type="text" name="text" placeholder="Text" required />

@@ -28,7 +28,6 @@ export const MetaBar = styled.div`
   height: 30px;
   background: rgb(143, 76, 13);
   background: linear-gradient(to right, #e5405e 0%, #ffdb3a 25%, #3fffa2 50%, #3fffa2 50%, #1a9be0 73%, #ba68ed 100%);
-  /* background: linear-gradient(90deg, rgba(143, 76, 13, 1) 8%, rgba(50, 9, 121, 1) 35%, rgba(46, 183, 186, 1) 100%); */
 `;
 
 export const OverlapBar = styled.div`

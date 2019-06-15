@@ -37,30 +37,17 @@ export const Button = styled.div`
   padding: 5px 10px;
 `;
 
-export const ModalBg = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: orange;
-  z-index: 1;
-`;
-
 export const ConfigBox = styled.div`
   position: absolute;
   padding: 25px;
   top: 70px;
   background-color: #222;
   display: none;
-  z-index: 1;
+  z-index: 2;
 `;
 
-export const DailyBox = styled.div`
-  position: absolute;
-  padding: 25px;
-  top: 70px;
+export const DateBox = styled.div`
   background-color: #222;
   display: none;
-  z-index: 1;
+  z-index: 2;
 `;
