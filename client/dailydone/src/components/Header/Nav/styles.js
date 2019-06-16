@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -18,16 +17,6 @@ export const Container = styled.div`
   }
 `;
 
-export const Navigation = styled(NavLink)`
-  color: #ccc;
-  font-size: 1, 2rem;
-  font-weight: bold;
-  margin: 0 20px 0 25px;
-
-  text-decoration: none;
-  cursor: pointer;
-`;
-
 export const Button = styled.div`
   color: #fff;
   font-size: 1.2rem;
@@ -41,12 +30,6 @@ export const ConfigBox = styled.div`
   position: absolute;
   padding: 25px;
   top: 70px;
-  background-color: #222;
-  display: none;
-  z-index: 2;
-`;
-
-export const DateBox = styled.div`
   background-color: #222;
   display: none;
   z-index: 2;

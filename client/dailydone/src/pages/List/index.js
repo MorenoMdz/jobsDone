@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import api from '../../services/api';
-import { Form } from '@rocketseat/unform';
-import { format, getDate, addDays } from 'date-fns';
+import { format } from 'date-fns';
 
-import ConfirmButton from '../../components/ConfirmButton';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import Day from '../../components/Day';
+import Month from '../../components/Month';
 
-import { Container, FormBox, FormInput, FormSelect, TasksList } from './styles';
+import { Container } from './styles';
 
 class List extends Component {
   state = {
@@ -17,41 +17,36 @@ class List extends Component {
     total: '',
     flash: '',
     error: '',
-    editingItemId: '',
     loading: true,
-    selectedDay: format(Date.now(), 'MM/DD/YYYY'),
+    selectedDate: format(Date.now(), 'MM/DD/YYYY'),
+    dateType: '',
   };
 
   componentDidMount() {
     this.fetchTypes();
-    this.updateList();
+    this.getConfig();
   }
 
-  setDay = async selectedDay => {
-    this.setState({ loading: true });
-    await this.setState({ selectedDay });
-    await this.updateList();
-    console.log('selectday', selectedDay); // TODO HERE
+  setDateType = type => {
+    this.setState({ dateType: type }, console.log('set', type));
+    this.updateList();
   };
 
   updateList = async () => {
-    const { selectedDay } = this.state;
-    console.log('selectday updated', selectedDay);
-    const response = await api.get(`completed?date=${selectedDay}&_expand=type`);
-    const flatList = response.data.map(item => ({ ...item, type: item.type.title }));
+    this.setState({ loading: true });
+    const { selectedDate } = this.state;
+    const response = await api.get(`completed?date=${selectedDate}&_expand=type`);
+    const flatList = await response.data.map(item => ({ ...item, type: item.type.title }));
     this.setState({ list: flatList, loading: false, editingItemId: '' });
-    this.getTotal();
     this.getConfig();
   };
 
   fetchTypes = async () => {
     const response = await api.get('types');
-    this.setState({ types: response.data, loading: false });
+    this.setState({ types: response.data });
   };
 
-  getTotal = () => {
-    const { list } = this.state;
-    let total = list.map(item => parseInt(item.value)).reduce((a, b) => a + b, 0);
+  setTotal = total => {
     this.setState({ total: parseInt(total).toFixed(2) });
   };
 
@@ -61,113 +56,18 @@ class List extends Component {
     this.setState({ dailyMeta, currency });
   };
 
-  removeItem = async id => {
-    this.setState({ loading: true });
-    await api.delete(`completed/${id}`);
-    this.updateList();
-  };
-
-  editItem = id => {
-    this.setState({ loading: false, editingItemId: id });
-  };
-
-  handleUpdate = async data => {
-    this.setState({ loading: true });
-    await api.put(`completed/${data.id}`, { ...data });
-    this.updateList();
-  };
-
-  handleSubmit = async (data, { resetForm }) => {
-    this.setState({ loading: true });
-    const id = Math.floor(Math.random() * 1000); //to be removed
-    const date = format(Date.now(), 'MM/DD/YYYY');
-    await api.post(`completed/`, {
-      ...data,
-      date,
-      id,
-    });
-    this.updateList();
-    resetForm();
-  };
-
   render() {
-    const { list, types, currency, dailyMeta, selectedDay, flash, loading, editingItemId, total } = this.state;
-
-    const displayItem = item => (
-      <li key={item.id}>
-        <span className="text">{item.text}</span>
-        <span className="type">{item.type}</span>
-        <span className="value">{item.value}</span>
-        <span className="duration">{item.duration}</span>
-
-        <div className="btn-box">
-          <button
-            className="edit-btn"
-            onClick={() => {
-              this.editItem(item.id);
-            }}
-          >
-            edit
-          </button>
-          <ConfirmButton
-            className="remove-btn"
-            dialog={['X', 'confirm']}
-            action={() => {
-              this.removeItem(item.id);
-            }}
-          >
-            x
-          </ConfirmButton>
-        </div>
-      </li>
-    );
-
-    const editItem = item => (
-      <li key={item.id}>
-        <FormBox>
-          <Form onSubmit={this.handleUpdate} initialData={{ ...item }}>
-            <FormInput type="hidden" name="id" />
-            <FormInput type="text" name="text" placeholder={item.text || 'text'} />
-            <FormSelect name="typeId" options={types} required />
-            <FormInput type="number" name="value" placeholder={item.value || 'value'} />
-            <FormInput type="number" name="duration" placeholder={item.duration || 'duration'} />
-            <button type="submit" className="save-btn">
-              Update
-            </button>
-          </Form>
-        </FormBox>
-      </li>
-    );
+    const { dateType, currency, dailyMeta, selectedDate, total } = this.state;
 
     return (
       <Fragment>
-        <Header setDay={this.setDay} />
+        <Header setDateType={this.setDateType} selectedDate={selectedDate} />
         <Container>
-          <p>{flash && flash}</p>
-          <p>{this.state.selectedDay}</p>
-          <FormBox>
-            <Form onSubmit={this.handleSubmit}>
-              <FormInput type="text" name="text" placeholder="Text" required />
-              {/* <FormInput type="text" name="type" placeholder="Type" required /> */}
-              <FormSelect name="typeId" options={types} required />
-              <FormInput type="number" name="value" placeholder="Value" required />
-              <FormInput type="number" name="duration" placeholder="Duration" required />
-              <button type="submit">Save</button>
-            </Form>
-          </FormBox>
-          <TasksList>
-            <div>
-              {!loading ? (
-                list.length > 0 ? (
-                  <ul>{list && list.map(item => (item.id !== editingItemId ? displayItem(item) : editItem(item)))}</ul>
-                ) : (
-                  <div className="nothing-box">Nothing??</div>
-                )
-              ) : (
-                <p>loading...</p>
-              )}
-            </div>
-          </TasksList>
+          {dateType === 'month' ? (
+            <Month selectedDate={selectedDate} setTotal={this.setTotal} />
+          ) : (
+            <Day selectedDate={selectedDate} setTotal={this.setTotal} />
+          )}
         </Container>
         <Footer total={total} meta={dailyMeta} currency={currency} />
       </Fragment>
