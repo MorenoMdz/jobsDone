@@ -7,9 +7,9 @@ export default function Header({ setDateType }) {
   return (
     <Container>
       <NavLink to="/">
-        <h3>DailyDone</h3>
+        <h3>JobsDone</h3>
       </NavLink>
-      <span style={{ color: 'orange' }}>TODO Footer monthly meta || Login logic</span>
+      <span style={{ color: 'orange' }}>TODO Name Change || Login logic</span>
       <Nav setDateType={setDateType} />
     </Container>
   );

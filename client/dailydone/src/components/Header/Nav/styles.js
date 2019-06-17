@@ -15,6 +15,9 @@ export const Container = styled.div`
   .config {
     font-size: 1.6rem;
   }
+  .selected {
+    opacity: 1;
+  }
 `;
 
 export const Button = styled.div`
@@ -24,6 +27,7 @@ export const Button = styled.div`
   font-weight: bold;
   cursor: pointer;
   padding: 5px 10px;
+  opacity: 0.8;
 `;
 
 export const ConfigBox = styled.div`

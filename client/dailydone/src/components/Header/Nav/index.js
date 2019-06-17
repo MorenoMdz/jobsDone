@@ -8,6 +8,7 @@ import { Container, ConfigBox, Button } from './styles';
 class Nav extends Component {
   state = {
     showBox: '',
+    selected: 'day',
   };
 
   componentWillMount() {
@@ -28,17 +29,28 @@ class Nav extends Component {
     this.setState({ showBox: boxName });
   };
 
-  render() {
-    const { showBox } = this.state;
+  handleClick = selected => {
+    this.setState({ selected });
     const { setDateType } = this.props;
+    setDateType(selected);
+  };
+
+  render() {
+    const { showBox, selected } = this.state;
+    console.log('selected', selected);
 
     return (
       <Container>
+        {/* <p>{selected}</p> */}
         <div>
-          <Button onClick={() => setDateType('day')}>Day</Button>
+          <Button onClick={() => this.handleClick('day')} className={selected === 'day' && 'selected'}>
+            Day
+          </Button>
         </div>
         <div>
-          <Button onClick={() => setDateType('month')}>Month</Button>
+          <Button onClick={() => this.handleClick('month')} className={selected === 'month' && 'selected'}>
+            Month
+          </Button>
         </div>
         <div>
           <Button onClick={() => this.toggleBox('config')} className="config">

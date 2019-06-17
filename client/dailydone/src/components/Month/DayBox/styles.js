@@ -17,7 +17,7 @@ const getBarHeight = height => height / 20;
 
 const getBarColor = height => {
   if (height > 500 && height < 1000) return `#3fffa2`;
-  if (height >= 1000) return `#ffdb3a`;
+  if (height >= 1000) return `#ba68ed`;
   return `#e5405e`;
 };
 
