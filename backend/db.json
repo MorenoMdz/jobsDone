@@ -43,10 +43,26 @@
       "date": "06/13/2019"
     },
     {
+      "id": 661,
+      "text": "2",
+      "typeId": "2",
+      "value": "2000",
+      "duration": "2",
+      "date": "06/13/2019"
+    },
+    {
       "id": 364,
       "text": "200",
       "typeId": "3",
       "value": "200",
+      "duration": "60",
+      "date": "06/14/2019"
+    },
+    {
+      "id": 3614,
+      "text": "200",
+      "typeId": "3",
+      "value": "25000",
       "duration": "60",
       "date": "06/14/2019"
     },
@@ -65,6 +81,30 @@
       "duration": "11",
       "date": "06/15/2019",
       "id": 838
+    },
+    {
+      "id": 251,
+      "text": "16",
+      "typeId": "1",
+      "value": "160",
+      "duration": "160",
+      "date": "06/16/2019"
+    },
+    {
+      "id": 660,
+      "text": "360",
+      "typeId": "1",
+      "value": "160",
+      "duration": "16",
+      "date": "06/16/2019"
+    },
+    {
+      "text": "Xbox 360 reball",
+      "typeId": "1",
+      "value": "300",
+      "duration": "60",
+      "date": "06/16/2019",
+      "id": 162
     }
   ],
   "users": [

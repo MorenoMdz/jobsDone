@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Input, Select } from '@rocketseat/unform';
 
 export const Container = styled.div`
   display: flex;
@@ -29,83 +28,13 @@ export const Container = styled.div`
 `;
 
 export const TasksList = styled.div`
-  .nothing-box {
-    height: 15vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  li {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    padding: 5px 0;
-    opacity: 0.8;
-
-    :nth-child(even) {
-      background-color: #383838;
-    }
-
-    span {
-      padding: 3px;
-      margin: 0 5px;
-      text-align: center;
-    }
-
-    .text {
-      width: 475px;
-    }
-
-    .type,
-    .value,
-    .time,
-    .duration {
-      width: 123px;
-    }
-
-    button {
-      display: none;
-      padding: 3px 10px;
-      margin: 0 3px;
-      border-radius: 2px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn-box {
-      width: 102px;
-    }
-
-    .edit-btn {
-      color: #fff;
-      background-color: #00b8ff;
-      width: 60px;
-    }
-
-    .remove-btn {
-      color: #fff;
-      background-color: #d900ff;
-      /* background-color: #bd00ff; */
-      margin-left: 3px;
-      text-align: center;
-      width: 30px;
-    }
-
-    [level='1'] {
-      color: #fff;
-      background-color: #bd00ff;
-      padding: 2px;
-      max-width: 60px;
-    }
-
-    :hover {
-      opacity: 1;
-      button {
-        display: inline;
-      }
-    }
-  }
+  width: 1024px;
+  margin: 0 auto;
+  display: grid;
+  justify-content: space;
+  grid-gap: 5px;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
 `;
 
 export const DateBox = styled.div`

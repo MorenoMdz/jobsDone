@@ -44,7 +44,7 @@ class List extends Component {
     this.setState({ list: flatList, loading: false, editingItemId: '' });
     const total = await this.getTotal();
     const { setTotal } = this.props;
-    setTotal(total);
+    setTotal({ value: total, from: 'day' });
   };
 
   fetchTypes = async () => {

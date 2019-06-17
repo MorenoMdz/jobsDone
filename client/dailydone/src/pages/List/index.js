@@ -47,7 +47,7 @@ class List extends Component {
   };
 
   setTotal = total => {
-    this.setState({ total: parseInt(total).toFixed(2) });
+    this.setState({ total: { ...total } });
   };
 
   getConfig = async () => {
