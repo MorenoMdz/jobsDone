@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import DatePicker from 'react-datepicker';
-import { format, getDay, getMonth, getYear, getDaysInMonth } from 'date-fns';
+import { format, startOfMonth, getDay, getMonth, getYear, getDaysInMonth, isSunday } from 'date-fns';
 
 import DayBox from './DayBox';
 
@@ -33,6 +33,7 @@ class List extends Component {
     const selectedDate = format(e, 'MM/DD/YYYY');
     this.fetchList(selectedDate);
     this.toggleCalendar();
+    this.setState({ selectedDate });
   };
 
   fetchList = async date => {
@@ -47,13 +48,12 @@ class List extends Component {
   };
 
   getTotal = list => {
-    // const { list } = this.state;
-    console.log('list from getTotal', list);
     let total = list.map(item => parseInt(item.value)).reduce((a, b) => a + b, 0);
     return total;
   };
 
   buildCalendar = (date, list) => {
+    const monthStartsAt = getDay(startOfMonth(date)) + 1;
     const daysInMonth = getDaysInMonth(date);
     const calendar = Array.from({ length: daysInMonth }, (v, i) => i + 1).map(item => ({ ...item, day: item }));
     calendar.map(item => {
@@ -65,11 +65,13 @@ class List extends Component {
         return (item.total = dayTotal);
       });
     });
-    this.setState({ calendar });
+    calendar.map(i => (i.isSunday = isSunday(`${getMonth(date) + 1}/${i.day}/${getYear(date)}`)));
+    this.setState({ calendar, monthStartsAt });
   };
 
   render() {
-    const { list, calendar, flash, loading, showCalendar, selectedDate } = this.state;
+    const { list, calendar, monthStartsAt, flash, loading, showCalendar, selectedDate } = this.state;
+    const { currency } = this.props;
 
     return (
       <Container>
@@ -78,7 +80,7 @@ class List extends Component {
           <button onClick={this.toggleCalendar} className="teal-btn">
             Select a Month
           </button>
-          <span>Month: {selectedDate}</span>
+          <span>Month: {format(selectedDate, 'MMMM')}</span>
         </ToolBox>
         {showCalendar && (
           <DateBox id="daily-box">
@@ -92,19 +94,21 @@ class List extends Component {
             />
           </DateBox>
         )}
-        <div>
-          <TasksList>
-            {!loading ? (
-              list.length > 0 ? (
-                list && calendar.map(item => <DayBox key={item.day} item={item} />)
-              ) : (
-                <div className="nothing-box">Nothing to list in this month</div>
-              )
-            ) : (
-              <p>loading...</p>
-            )}
-          </TasksList>
-        </div>
+        <TasksList>
+          {!loading ? (
+            calendar.map(item => (
+              <DayBox
+                key={item.day}
+                item={item}
+                currency={currency}
+                monthStartsAt={item.day === 1 && monthStartsAt}
+                isSunday={item.isSunday}
+              />
+            ))
+          ) : (
+            <p>loading...</p>
+          )}
+        </TasksList>
       </Container>
     );
   }

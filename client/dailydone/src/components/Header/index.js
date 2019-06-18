@@ -9,7 +9,7 @@ export default function Header({ setDateType }) {
       <NavLink to="/">
         <h3>JobsDone</h3>
       </NavLink>
-      <span style={{ color: 'orange' }}>TODO Name Change || Login logic</span>
+      <span style={{ color: 'orange' }}>TODO Login logic</span>
       <Nav setDateType={setDateType} />
     </Container>
   );

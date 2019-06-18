@@ -28,7 +28,7 @@ class List extends Component {
   }
 
   setDateType = type => {
-    this.setState({ dateType: type }, console.log('set', type));
+    this.setState({ dateType: type });
     this.updateList();
   };
 
@@ -64,9 +64,9 @@ class List extends Component {
         <Header setDateType={this.setDateType} selectedDate={selectedDate} />
         <Container>
           {dateType === 'month' ? (
-            <Month selectedDate={selectedDate} setTotal={this.setTotal} />
+            <Month selectedDate={selectedDate} setTotal={this.setTotal} currency={currency} />
           ) : (
-            <Day selectedDate={selectedDate} setTotal={this.setTotal} />
+            <Day selectedDate={selectedDate} setTotal={this.setTotal} currency={currency} />
           )}
         </Container>
         <Footer total={total} meta={dailyMeta} currency={currency} />

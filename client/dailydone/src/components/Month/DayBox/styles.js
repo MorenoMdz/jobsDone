@@ -7,11 +7,18 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid #11464e;
+  border: ${props => getBorderColor(props.hasValue)};
   border-radius: 3px;
   margin: 5px;
   padding: 15px;
+  background: ${props => props.isSunday && `#444`};
+
+  span {
+    font-weight: bold;
+  }
 `;
+
+const getBorderColor = hasValue => (hasValue ? `2px solid #2DCEC0` : `2px solid #aaa`);
 
 const getBarHeight = height => height / 20;
 
@@ -23,11 +30,10 @@ const getBarColor = height => {
 
 export const Bar = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: flex-end;
   flex-direction: column;
-  /* background: #3fffa2; */
   background: ${props => getBarColor(props.height)};
-  /* background: linear-gradient(to top, #e5405e 0%, #ffdb3a 25%, #3fffa2 50%, #3fffa2 50%, #1a9be0 73%, #ba68ed 100%); */
   width: 50px;
   height: ${props => `${getBarHeight(props.height)}px`};
   max-height: 80px;

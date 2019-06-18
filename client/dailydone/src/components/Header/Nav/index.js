@@ -29,7 +29,7 @@ class Nav extends Component {
     this.setState({ showBox: boxName });
   };
 
-  handleClick = selected => {
+  handleNavClick = selected => {
     this.setState({ selected });
     const { setDateType } = this.props;
     setDateType(selected);
@@ -37,18 +37,17 @@ class Nav extends Component {
 
   render() {
     const { showBox, selected } = this.state;
-    console.log('selected', selected);
 
     return (
       <Container>
         {/* <p>{selected}</p> */}
         <div>
-          <Button onClick={() => this.handleClick('day')} className={selected === 'day' && 'selected'}>
+          <Button onClick={() => this.handleNavClick('day')} className={selected === 'day' && 'selected'}>
             Day
           </Button>
         </div>
         <div>
-          <Button onClick={() => this.handleClick('month')} className={selected === 'month' && 'selected'}>
+          <Button onClick={() => this.handleNavClick('month')} className={selected === 'month' && 'selected'}>
             Month
           </Button>
         </div>

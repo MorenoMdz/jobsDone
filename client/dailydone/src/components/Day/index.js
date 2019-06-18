@@ -72,7 +72,6 @@ class List extends Component {
   handleUpdate = async data => {
     this.setState({ loading: true });
     const { selectedDate } = this.state;
-    console.log(selectedDate);
     await api.put(`completed/${data.id}`, { ...data, date: selectedDate });
     this.fetchList(selectedDate);
   };

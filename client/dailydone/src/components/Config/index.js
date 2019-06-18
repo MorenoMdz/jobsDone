@@ -149,7 +149,7 @@ class Config extends Component {
             )}
             <Form onSubmit={this.addType}>
               <label htmlFor="title">New Type</label>
-              <Input type="text" name="title" /* id="title" */ placeholder={'Type Title'} />
+              <Input type="text" name="title" placeholder={'Type Title'} />
               <button type="submit" className="teal-btn">
                 Add
               </button>
@@ -160,8 +160,5 @@ class Config extends Component {
     );
   }
 }
-
-// TODO type edit cancel btn
-// TODO config api calls
 
 export default Config;
