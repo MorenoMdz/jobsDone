@@ -19,7 +19,7 @@ class List extends Component {
     error: '',
     loading: true,
     selectedDate: format(Date.now(), 'MM/DD/YYYY'),
-    dateType: '',
+    dateType: 'day',
   };
 
   componentDidMount() {
@@ -58,15 +58,21 @@ class List extends Component {
 
   render() {
     const { dateType, currency, dailyMeta, selectedDate, total } = this.state;
+    const { day } = this.props.match.params;
 
     return (
       <Fragment>
-        <Header setDateType={this.setDateType} selectedDate={selectedDate} />
+        <Header setDateType={this.setDateType} selectedDate={selectedDate} selected={dateType} />
         <Container>
           {dateType === 'month' ? (
-            <Month selectedDate={selectedDate} setTotal={this.setTotal} currency={currency} />
+            <Month
+              selectedDate={selectedDate}
+              setDateType={this.setDateType}
+              setTotal={this.setTotal}
+              currency={currency}
+            />
           ) : (
-            <Day selectedDate={selectedDate} setTotal={this.setTotal} currency={currency} />
+            <Day selectedDate={selectedDate} setTotal={this.setTotal} currency={currency} day={day} />
           )}
         </Container>
         <Footer total={total} meta={dailyMeta} currency={currency} />

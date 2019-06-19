@@ -91,13 +91,14 @@ class List extends Component {
 
   render() {
     const { list, types, flash, loading, editingItemId, showCalendar, selectedDate } = this.state;
+    const { currency } = this.props;
 
     const displayItem = item => (
       <li key={item.id}>
         <span className="text">{item.text}</span>
         <span className="type">{item.type}</span>
-        <span className="value">{item.value}</span>
-        <span className="duration">{item.duration}</span>
+        <span className="value">{`${currency} ${parseInt(item.value).toFixed(2)}`}</span>
+        <span className="duration">{item.duration} min</span>
 
         <div className="btn-box">
           <button

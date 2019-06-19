@@ -3,14 +3,14 @@ import Nav from './Nav';
 
 import { Container, NavLink } from './styles';
 
-export default function Header({ setDateType }) {
+export default function Header({ setDateType, selected }) {
   return (
     <Container>
       <NavLink to="/">
         <h3>JobsDone</h3>
       </NavLink>
       <span style={{ color: 'orange' }}>TODO Login logic</span>
-      <Nav setDateType={setDateType} />
+      <Nav setDateType={setDateType} selected={selected} />
     </Container>
   );
 }

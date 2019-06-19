@@ -15,7 +15,7 @@ export default function Login() {
           <FormInput type="text" name="username" placeholder="Username" />
           <FormInput type="password" name="password" placeholder="Password" />
           {/* TODO login logic */}
-          <Link to="/today">
+          <Link to="/list">
             <button type="submit">Login</button>
           </Link>
         </FormBox>

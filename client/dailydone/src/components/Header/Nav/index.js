@@ -8,7 +8,6 @@ import { Container, ConfigBox, Button } from './styles';
 class Nav extends Component {
   state = {
     showBox: '',
-    selected: 'day',
   };
 
   componentWillMount() {
@@ -36,7 +35,9 @@ class Nav extends Component {
   };
 
   render() {
-    const { showBox, selected } = this.state;
+    const { showBox } = this.state;
+    const { selected } = this.props;
+    console.log(selected);
 
     return (
       <Container>

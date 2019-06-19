@@ -66,12 +66,13 @@ class List extends Component {
       });
     });
     calendar.map(i => (i.isSunday = isSunday(`${getMonth(date) + 1}/${i.day}/${getYear(date)}`)));
+    calendar.map(i => (i.slug = `0${getMonth(date) + 1}/${i.day}/${getYear(date)}`));
     this.setState({ calendar, monthStartsAt });
   };
 
   render() {
     const { list, calendar, monthStartsAt, flash, loading, showCalendar, selectedDate } = this.state;
-    const { currency } = this.props;
+    const { currency, setDateType } = this.props;
 
     return (
       <Container>
@@ -103,6 +104,7 @@ class List extends Component {
                 currency={currency}
                 monthStartsAt={item.day === 1 && monthStartsAt}
                 isSunday={item.isSunday}
+                setDateType={setDateType}
               />
             ))
           ) : (
