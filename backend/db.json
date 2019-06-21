@@ -109,6 +109,14 @@
       "duration": "60",
       "date": "06/16/2019",
       "id": 162
+    },
+    {
+      "id": 380,
+      "text": "Teste 20",
+      "typeId": "1",
+      "value": "200",
+      "duration": "70",
+      "date": "06/20/2019"
     }
   ],
   "users": [

@@ -27,27 +27,21 @@ class List extends Component {
     this.getConfig();
   }
 
-  setDateType = type => {
-    this.setState({ dateType: type });
-    this.updateList();
+  setDateType = async (type, day) => {
+    console.log('type', type, 'day', day);
+    await this.setState({ dateType: type, selectedDate: day });
+    this.fetchDay(day);
   };
 
-  updateList = async () => {
-    this.setState({ loading: true });
-    const { selectedDate } = this.state;
-    const response = await api.get(`completed?date=${selectedDate}&_expand=type`);
+  fetchDay = async day => {
+    const response = await api.get(`completed?date=${day}&_expand=type`);
     const flatList = await response.data.map(item => ({ ...item, type: item.type.title }));
     this.setState({ list: flatList, loading: false, editingItemId: '' });
-    this.getConfig();
   };
 
   fetchTypes = async () => {
     const response = await api.get('types');
     this.setState({ types: response.data });
-  };
-
-  setTotal = total => {
-    this.setState({ total: { ...total } });
   };
 
   getConfig = async () => {
@@ -56,9 +50,12 @@ class List extends Component {
     this.setState({ dailyMeta, currency });
   };
 
+  setTotal = total => {
+    this.setState({ total: { ...total } });
+  };
+
   render() {
     const { dateType, currency, dailyMeta, selectedDate, total } = this.state;
-    const { day } = this.props.match.params;
 
     return (
       <Fragment>
@@ -72,7 +69,7 @@ class List extends Component {
               currency={currency}
             />
           ) : (
-            <Day selectedDate={selectedDate} setTotal={this.setTotal} currency={currency} day={day} />
+            <Day selectedDate={selectedDate} setTotal={this.setTotal} currency={currency} day={selectedDate} />
           )}
         </Container>
         <Footer total={total} meta={dailyMeta} currency={currency} />
@@ -82,3 +79,5 @@ class List extends Component {
 }
 
 export default List;
+
+// PASS date from daybox to day

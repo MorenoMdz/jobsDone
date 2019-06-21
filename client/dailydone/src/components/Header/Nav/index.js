@@ -37,11 +37,9 @@ class Nav extends Component {
   render() {
     const { showBox } = this.state;
     const { selected } = this.props;
-    console.log(selected);
 
     return (
       <Container>
-        {/* <p>{selected}</p> */}
         <div>
           <Button onClick={() => this.handleNavClick('day')} className={selected === 'day' && 'selected'}>
             Day

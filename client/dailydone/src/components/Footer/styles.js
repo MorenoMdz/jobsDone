@@ -36,5 +36,4 @@ export const OverlapBar = styled.div`
   width: ${props => `${props.width}px`};
   height: 30px;
   background: #222;
-  border-right: 1px solid lightblue;
 `;

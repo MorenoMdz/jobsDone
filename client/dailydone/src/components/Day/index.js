@@ -21,7 +21,7 @@ class List extends Component {
   };
 
   async componentDidMount() {
-    const { selectedDate } = this.state;
+    const { selectedDate } = this.props;
     this.fetchTypes();
     this.fetchList(selectedDate);
   }
@@ -90,8 +90,8 @@ class List extends Component {
   };
 
   render() {
-    const { list, types, flash, loading, editingItemId, showCalendar, selectedDate } = this.state;
-    const { currency } = this.props;
+    const { list, types, flash, loading, editingItemId, showCalendar } = this.state;
+    const { currency, selectedDate } = this.props;
 
     const displayItem = item => (
       <li key={item.id}>

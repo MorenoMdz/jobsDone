@@ -13,6 +13,11 @@ export const Container = styled.div`
   padding: 15px;
   background: ${props => props.isSunday && `#444`};
 
+  :hover {
+    opacity: 0.9;
+    cursor: pointer;
+  }
+
   span {
     font-weight: bold;
   }
