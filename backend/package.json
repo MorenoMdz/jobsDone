@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "json:server": "json-server --watch db.json --port 3004",
-    "client": "yarn --cwd ../client/dailydone/ run start",
+    "client": "yarn --cwd ../client/jobsdone/ run start",
     "start": "concurrently \"npm run json:server\" \"npm run client\""
   },
   "author": "",
