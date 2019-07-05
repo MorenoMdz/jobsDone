@@ -142,7 +142,7 @@ export const FormBox = styled.div`
     outline: none;
   }
 
-  [name='text'] {
+  [name='title'] {
     width: 475px;
   }
 

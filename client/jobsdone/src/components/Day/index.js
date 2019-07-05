@@ -16,7 +16,7 @@ class List extends Component {
     error: '',
     editingItemId: '',
     loading: true,
-    selectedDate: format(Date.now(), 'MM/DD/YYYY'),
+    selectedDate: format(Date.now(), 'YYYY-MM-DD'),
     showCalendar: false,
   };
 
@@ -32,14 +32,15 @@ class List extends Component {
   };
 
   handleChange = async e => {
-    const selectedDate = format(e, 'MM/DD/YYYY');
+    const selectedDate = format(e, 'YYYY-MM-DD');
     this.setState({ selectedDate });
     this.fetchList(selectedDate);
     this.toggleCalendar();
   };
 
   fetchList = async date => {
-    const response = await api.get(`completed?date=${date}&_expand=type`);
+    const response = await api.get(`search?day=${date}`);
+    // const response = await api.get(`completed?date=${date}&_expand=type`);
     const flatList = await response.data.map(item => ({ ...item, type: item.type.title }));
     this.setState({ list: flatList, loading: false, editingItemId: '' });
     const total = await this.getTotal();
@@ -60,7 +61,7 @@ class List extends Component {
 
   removeItem = async id => {
     this.setState({ loading: true });
-    await api.delete(`completed/${id}`);
+    await api.delete(`tasks/${id}`);
     const { selectedDate } = this.state;
     this.fetchList(selectedDate);
   };
@@ -72,18 +73,19 @@ class List extends Component {
   handleUpdate = async data => {
     this.setState({ loading: true });
     const { selectedDate } = this.state;
-    await api.put(`completed/${data.id}`, { ...data, date: selectedDate });
+    console.log(`tasks/${data.id}`, data);
+    await api.put(`tasks/${data.id}`, { ...data, date: selectedDate });
     this.fetchList(selectedDate);
   };
 
   handleSubmit = async (data, { resetForm }) => {
     this.setState({ loading: true });
-    const id = Math.floor(Math.random() * 1000); //to be removed
+    // const id = Math.floor(Math.random() * 1000); //to be removed
     const { selectedDate } = this.state;
-    await api.post(`completed/`, {
+    await api.post(`tasks/`, {
       ...data,
       date: selectedDate,
-      id,
+      // id,
     });
     this.fetchList(selectedDate);
     resetForm();
@@ -95,7 +97,7 @@ class List extends Component {
 
     const displayItem = item => (
       <li key={item.id}>
-        <span className="text">{item.text}</span>
+        <span className="text">{item.title}</span>
         <span className="type">{item.type}</span>
         <span className="value">{`${currency} ${parseInt(item.value).toFixed(2)}`}</span>
         <span className="duration">{item.duration} min</span>
@@ -127,8 +129,8 @@ class List extends Component {
         <FormBox>
           <Form onSubmit={this.handleUpdate} initialData={{ ...item }}>
             <FormInput type="hidden" name="id" />
-            <FormInput type="text" name="text" placeholder={item.text || 'text'} />
-            <FormSelect name="typeId" options={types} required />
+            <FormInput type="text" name="title" placeholder={item.title || 'title'} />
+            <FormSelect name="type_id" options={types} required />
             <FormInput type="number" name="value" placeholder={item.value || 'value'} />
             <FormInput type="number" name="duration" placeholder={item.duration || 'duration'} />
             <button type="submit" className="save-btn">
@@ -164,8 +166,8 @@ class List extends Component {
         <div>
           <FormBox>
             <Form onSubmit={this.handleSubmit}>
-              <FormInput type="text" name="text" placeholder="Text" required />
-              <FormSelect name="typeId" options={types} required />
+              <FormInput type="text" name="title" placeholder="Title" required />
+              <FormSelect name="type_id" options={types} required />
               <FormInput type="number" name="value" placeholder="Value" required />
               <FormInput type="number" name="duration" placeholder="Duration" required />
               <button type="submit">Save</button>
@@ -189,7 +191,3 @@ class List extends Component {
 }
 
 export default List;
-
-// nav calls function up in List
-// function sets month or day
-// display month or day

@@ -18,7 +18,7 @@ class List extends Component {
     flash: '',
     error: '',
     loading: true,
-    selectedDate: format(Date.now(), 'MM/DD/YYYY'),
+    selectedDate: format(Date.now(), 'YYYY-MM-DD'),
     dateType: 'day',
   };
 
@@ -34,7 +34,8 @@ class List extends Component {
   };
 
   fetchDay = async day => {
-    const response = await api.get(`completed?date=${day}&_expand=type`);
+    // const response = await api.get(`search?day=2019-06-24completed?date=${day}&_expand=type`);
+    const response = await api.get(`search?day=${day}`);
     const flatList = await response.data.map(item => ({ ...item, type: item.type.title }));
     this.setState({ list: flatList, loading: false, editingItemId: '' });
   };

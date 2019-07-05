@@ -10,10 +10,9 @@ class SearchController {
       const date = format(day, 'YYYY-MM-DD')
       const nextDay = addDays(date, 1)
       const tasks = await Task.query()
-        // .where('created_at', '>', date)
-        // .where('created_at', '<', nextDay)
         .whereBetween('created_at', [date, nextDay])
         .where('user_id', userId)
+        .with('type')
         .fetch()
       return tasks
     } else if (month) {

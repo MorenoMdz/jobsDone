@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form } from '@rocketseat/unform';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import api from '../../services/api';
-import { login, logout } from '../../services/auth';
+import { login } from '../../services/auth';
 
 import { Container, FormBox, FormInput, LinkBox } from './styles';
 
@@ -23,6 +23,7 @@ class Login extends Component {
         password,
       });
       login(response.data.token, response.data.user_id);
+      this.props.history.push('/list');
     } catch (error) {
       this.setState({ error: 'Login failed' });
     }
