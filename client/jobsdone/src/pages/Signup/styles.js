@@ -34,6 +34,24 @@ export const FormBox = styled.div`
   }
 `;
 
+export const LoadingBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 260px;
+  width: 100px;
+`;
+
+export const ErrorBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  color: orange;
+  font-weight: bold;
+`;
+
 export const FormInput = styled(Input)`
   width: 250px;
   margin: 5px;

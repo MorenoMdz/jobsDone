@@ -42,6 +42,15 @@ export const FormInput = styled(Input)`
   font-weight: bold;
 `;
 
+export const ErrorBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  color: orange;
+  font-weight: bold;
+`;
+
 export const LinkBox = styled.div`
   display: flex;
   justify-content: flex-end;

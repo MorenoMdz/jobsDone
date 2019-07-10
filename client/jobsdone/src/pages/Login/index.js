@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Form } from '@rocketseat/unform';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import { login } from '../../services/auth';
 
-import { Container, FormBox, FormInput, LinkBox } from './styles';
+import { Container, FormBox, FormInput, LinkBox, ErrorBox } from './styles';
 
 class Login extends Component {
   state = {
@@ -36,7 +36,7 @@ class Login extends Component {
         <div className="logo">
           <h3>JobsDone</h3>
         </div>
-        <strong>{error}</strong>
+        <ErrorBox>{error}</ErrorBox>
         <Form onSubmit={this.handleSubmit}>
           <FormBox>
             <FormInput type="text" name="email" placeholder="Your Email" />
