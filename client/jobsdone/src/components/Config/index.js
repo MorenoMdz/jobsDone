@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
+import { logout } from '../../services/auth';
 import { Form, Input } from '@rocketseat/unform';
 
 import ConfirmButton from '../../components/ConfirmButton';
 
-import { Container, FormBox, TypesBox } from './styles';
+import { Container, FormBox, TypesBox, LogoutBox } from './styles';
 
 class Config extends Component {
   state = {
@@ -64,6 +65,11 @@ class Config extends Component {
     await api.post(`types`, { title: e.title });
     this.updateList();
     resetForm();
+    window.location.reload();
+  };
+
+  handleLogout = () => {
+    logout();
     window.location.reload();
   };
 
@@ -156,6 +162,9 @@ class Config extends Component {
             </Form>
           </div>
         </TypesBox>
+        <LogoutBox>
+          <button onClick={() => this.handleLogout()}>Logout</button>
+        </LogoutBox>
       </Container>
     );
   }

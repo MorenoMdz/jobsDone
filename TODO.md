@@ -10,10 +10,6 @@
 - Month comm to backend
 - Footer comm to backend
 - User config comm to backend
-  > Login Logic !!!!!! Half done.
-  > Signup Logic
-  > ** Style error box
-  > ** Secure routes
   > Animations
   > Forgot Password page
 

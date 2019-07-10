@@ -5,9 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
-  /* background: #333; */
-
-  /* min-height: calc(100vh - 150px); */
 
   .nothing-box {
     height: 15vh;
@@ -29,7 +26,6 @@ export const Container = styled.div`
     :hover {
       opacity: 0.8;
     }
-    /* flex: 2; */
   }
 
   h3 {
@@ -176,6 +172,30 @@ export const TypesBox = styled.div`
       margin: 0 10px;
       text-align: center;
       flex: 2;
+    }
+  }
+`;
+
+export const LogoutBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+
+  button {
+    margin-top: 10px;
+    padding: 3px;
+    font-weight: bold;
+    color: #555;
+    align-self: flex-end;
+    border: none;
+    background: none;
+    text-decoration: underline;
+    cursor: pointer;
+
+    :hover {
+      color: #ccc;
     }
   }
 `;
