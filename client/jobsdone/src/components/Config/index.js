@@ -11,7 +11,7 @@ class Config extends Component {
   state = {
     types: [],
     currency: '',
-    dailyMeta: '',
+    meta: '',
     editingTypeId: undefined,
     loading: true,
   };
@@ -21,12 +21,14 @@ class Config extends Component {
   }
 
   updateList = async () => {
+    const userId = localStorage.getItem('@jobsdone-id');
     const types = await api.get('types');
-    const settings = await api.get('users/1');
-    const { dailyMeta, currency } = settings.data;
+    const settings = await api.get(`users/${userId}`);
+    console.log('settings', settings);
+    const { meta, currency } = settings.data;
     this.setState({
       types: types.data,
-      dailyMeta,
+      meta: meta,
       currency,
       loading: false,
       editingTypeId: undefined,
@@ -43,14 +45,15 @@ class Config extends Component {
     this.setState({ loading: false, editingTypeId: id });
   };
 
-  handleUpdate = async data => {
+  handleTypeUpdate = async data => {
     this.setState({ loading: true });
     await api.put(`types/${data.id}`, { title: data.title });
     this.updateList();
   };
 
-  handleSubmit = async ({ dailyMeta, currency }) => {
-    await api.put(`users/1`, { dailyMeta, currency });
+  handleSubmit = async ({ meta, currency }) => {
+    const userId = localStorage.getItem('@jobsdone-id');
+    await api.put(`users/${userId}`, { meta, currency });
     this.updateList();
     window.location.reload();
   };
@@ -74,7 +77,7 @@ class Config extends Component {
   };
 
   render() {
-    const { currency, dailyMeta, types, loading, editingTypeId } = this.state;
+    const { currency, meta, types, loading, editingTypeId } = this.state;
 
     const displayType = type => (
       <li key={type.id}>
@@ -104,7 +107,7 @@ class Config extends Component {
     const editType = type => (
       <li key={type.id}>
         <FormBox>
-          <Form onSubmit={this.handleUpdate} initialData={{ ...type }}>
+          <Form onSubmit={this.handleTypeUpdate} initialData={{ ...type }}>
             <Input type="hidden" name="id" />
             <Input type="text" name="title" placeholder={type.text || 'text'} />
             <button type="submit" className="teal-btn">
@@ -116,7 +119,7 @@ class Config extends Component {
     );
 
     const initialData = {
-      dailyMeta: dailyMeta,
+      meta: meta,
       currency: currency,
     };
 
@@ -127,7 +130,7 @@ class Config extends Component {
           <Form onSubmit={this.handleSubmit} initialData={initialData}>
             <div>
               <label htmlFor="meta">Daily Meta (in {currency})</label>
-              <Input type="number" name="dailyMeta" placeholder="1000" className="meta" />
+              <Input type="number" name="meta" placeholder="1000" className="meta" />
             </div>
             <div>
               <label htmlFor="currency">Currency</label>

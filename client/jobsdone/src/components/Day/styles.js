@@ -55,6 +55,8 @@ export const TasksList = styled.div`
 
     .text {
       width: 475px;
+      text-align: left;
+      padding-left: 10px;
     }
 
     .type,
@@ -144,6 +146,8 @@ export const FormBox = styled.div`
 
   [name='title'] {
     width: 475px;
+    text-align: left;
+    padding-left: 10px;
   }
 
   [name='type'],

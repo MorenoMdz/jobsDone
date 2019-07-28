@@ -13,7 +13,6 @@ class TaskController {
   async store ({ request, auth }) {
     const data = request.only(['title', 'value', 'duration', 'type_id'])
     const task = await Task.create({ ...data, user_id: auth.user.id })
-    console.log('task', task)
     return task
   }
 

@@ -28,7 +28,6 @@ class List extends Component {
   }
 
   setDateType = async (type, day = format(Date.now(), 'YYYY-MM-DD')) => {
-    console.log('type', type, 'day', day);
     await this.setState({ dateType: type, selectedDate: day });
     this.fetchDay(day);
   };
@@ -45,9 +44,10 @@ class List extends Component {
   };
 
   getConfig = async () => {
-    const response = await api.get('users/1');
-    const { dailyMeta, currency } = response.data;
-    this.setState({ dailyMeta, currency });
+    const userId = localStorage.getItem('@jobsdone-id');
+    const response = await api.get(`users/${userId}`);
+    const { meta, currency } = response.data;
+    this.setState({ meta, currency });
   };
 
   setTotal = total => {
@@ -55,7 +55,7 @@ class List extends Component {
   };
 
   render() {
-    const { dateType, currency, dailyMeta, selectedDate, total } = this.state;
+    const { dateType, currency, meta, selectedDate, total } = this.state;
 
     return (
       <Fragment>
@@ -72,7 +72,7 @@ class List extends Component {
             <Day selectedDate={selectedDate} setTotal={this.setTotal} currency={currency} day={selectedDate} />
           )}
         </Container>
-        <Footer total={total} meta={dailyMeta} currency={currency} />
+        <Footer total={total} meta={meta} currency={currency} />
       </Fragment>
     );
   }

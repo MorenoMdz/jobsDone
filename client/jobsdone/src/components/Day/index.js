@@ -72,8 +72,7 @@ class List extends Component {
   handleUpdate = async data => {
     this.setState({ loading: true });
     const { selectedDate } = this.state;
-    console.log(`tasks/${data.id}`, data);
-    await api.put(`tasks/${data.id}`, { ...data, created_at: data.created_at });
+    await api.put(`tasks/${data.id}`, { ...data /* created_at: data.created_at */ });
     this.fetchList(selectedDate);
   };
 
@@ -83,7 +82,6 @@ class List extends Component {
     console.log({ ...data });
     await api.post(`tasks/`, {
       ...data,
-      // date: selectedDate,
     });
     this.fetchList(selectedDate);
     resetForm();
@@ -99,7 +97,6 @@ class List extends Component {
         <span className="type">{item.type}</span>
         <span className="value">{`${currency} ${parseInt(item.value).toFixed(2)}`}</span>
         <span className="duration">{item.duration} min</span>
-        <span /* hidden */>{item.created_at} </span>
 
         <div className="btn-box">
           <button
