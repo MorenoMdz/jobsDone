@@ -16,7 +16,7 @@ class List extends Component {
     error: '',
     editingItemId: '',
     loading: true,
-    selectedDate: format(Date.now(), 'YYYY-MM-DD'),
+    selectedDate: format(Date.now(), 'YYYY-MM-DD hh:mm:ss'),
     showCalendar: false,
   };
 
@@ -32,7 +32,7 @@ class List extends Component {
   };
 
   handleChange = async e => {
-    const selectedDate = format(e, 'YYYY-MM-DD');
+    const selectedDate = format(e, 'YYYY-MM-DD hh:mm:ss');
     this.setState({ selectedDate });
     this.fetchList(selectedDate);
     this.toggleCalendar();
@@ -40,7 +40,6 @@ class List extends Component {
 
   fetchList = async date => {
     const response = await api.get(`search?day=${date}`);
-    // const response = await api.get(`completed?date=${date}&_expand=type`);
     const flatList = await response.data.map(item => ({ ...item, type: item.type.title }));
     this.setState({ list: flatList, loading: false, editingItemId: '' });
     const total = await this.getTotal();
@@ -74,18 +73,17 @@ class List extends Component {
     this.setState({ loading: true });
     const { selectedDate } = this.state;
     console.log(`tasks/${data.id}`, data);
-    await api.put(`tasks/${data.id}`, { ...data, date: selectedDate });
+    await api.put(`tasks/${data.id}`, { ...data, created_at: data.created_at });
     this.fetchList(selectedDate);
   };
 
   handleSubmit = async (data, { resetForm }) => {
     this.setState({ loading: true });
-    // const id = Math.floor(Math.random() * 1000); //to be removed
     const { selectedDate } = this.state;
+    console.log({ ...data });
     await api.post(`tasks/`, {
       ...data,
-      date: selectedDate,
-      // id,
+      // date: selectedDate,
     });
     this.fetchList(selectedDate);
     resetForm();
@@ -101,6 +99,7 @@ class List extends Component {
         <span className="type">{item.type}</span>
         <span className="value">{`${currency} ${parseInt(item.value).toFixed(2)}`}</span>
         <span className="duration">{item.duration} min</span>
+        <span /* hidden */>{item.created_at} </span>
 
         <div className="btn-box">
           <button
@@ -129,6 +128,7 @@ class List extends Component {
         <FormBox>
           <Form onSubmit={this.handleUpdate} initialData={{ ...item }}>
             <FormInput type="hidden" name="id" />
+            <FormInput type="hidden" name="created-at" value={item.created_at} />
             <FormInput type="text" name="title" placeholder={item.title || 'title'} />
             <FormSelect name="type_id" options={types} required />
             <FormInput type="number" name="value" placeholder={item.value || 'value'} />

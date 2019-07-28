@@ -27,14 +27,13 @@ class List extends Component {
     this.getConfig();
   }
 
-  setDateType = async (type, day) => {
+  setDateType = async (type, day = format(Date.now(), 'YYYY-MM-DD')) => {
     console.log('type', type, 'day', day);
     await this.setState({ dateType: type, selectedDate: day });
     this.fetchDay(day);
   };
 
   fetchDay = async day => {
-    // const response = await api.get(`search?day=2019-06-24completed?date=${day}&_expand=type`);
     const response = await api.get(`search?day=${day}`);
     const flatList = await response.data.map(item => ({ ...item, type: item.type.title }));
     this.setState({ list: flatList, loading: false, editingItemId: '' });

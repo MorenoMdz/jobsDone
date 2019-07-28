@@ -39,7 +39,8 @@ class List extends Component {
   fetchList = async date => {
     const month = getMonth(date);
     const year = getYear(date);
-    const response = await api.get(`completed?date_gte=0${month + 1}/01/${year}&date_lte=0${month + 1}/31/${year}`);
+    const dateQuery = `search?month=${year}-0${month + 1}-01`;
+    const response = await api.get(dateQuery);
     this.setState({ list: response.data, loading: false });
     this.buildCalendar(date, response.data);
     const total = await this.getTotal(response.data);
@@ -59,7 +60,7 @@ class List extends Component {
     calendar.map(item => {
       let dayTotal = 0;
       list.map(day => {
-        if (parseInt(format(day.date, 'DD')) === item.day) {
+        if (parseInt(format(day.created_at, 'DD')) === item.day) {
           dayTotal = dayTotal + parseInt(day.value);
         }
         return (item.total = dayTotal);
@@ -117,7 +118,3 @@ class List extends Component {
 }
 
 export default List;
-
-// nav calls function up in List
-// function sets month or day
-// display month or day

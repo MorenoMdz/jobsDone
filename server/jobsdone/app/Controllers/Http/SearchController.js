@@ -22,6 +22,7 @@ class SearchController {
         .where('created_at', '<', endOfMonth(date))
         .where('user_id', userId)
         .fetch()
+      console.log('tasks', tasks)
       return tasks
     }
     return response.send({ message: { error: 'No task found' } })
