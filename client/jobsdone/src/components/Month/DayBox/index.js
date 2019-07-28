@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Bar } from './styles';
 
-const DayBox = ({ item, currency, monthStartsAt, isSunday, setDateType }) => {
+const DayBox = ({ item, currency, monthStartsAt, isSunday, isFuture, setDateType }) => {
   return (
     <Container
       hasValue={item.total > 0}
       style={monthStartsAt ? { gridColumn: monthStartsAt } : {}}
       isSunday={isSunday}
+      isFuture={isFuture}
       onClick={() => setDateType('day', item.slug)}
     >
       <h4>{item.day}</h4>

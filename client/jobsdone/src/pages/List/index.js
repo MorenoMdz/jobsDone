@@ -29,6 +29,7 @@ class List extends Component {
 
   setDateType = async (type, day = format(Date.now(), 'YYYY-MM-DD')) => {
     await this.setState({ dateType: type, selectedDate: day });
+    this.setState({ selectedDate: day });
     this.fetchDay(day);
   };
 

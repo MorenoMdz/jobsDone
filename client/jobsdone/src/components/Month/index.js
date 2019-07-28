@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import DatePicker from 'react-datepicker';
-import { format, startOfMonth, getDay, getMonth, getYear, getDaysInMonth, isSunday } from 'date-fns';
+import { format, startOfMonth, getDay, getMonth, getYear, getDaysInMonth, isSunday, isFuture } from 'date-fns';
 
 import DayBox from './DayBox';
 
@@ -68,6 +68,7 @@ class List extends Component {
       });
     });
     calendar.map(i => (i.isSunday = isSunday(`${getMonth(date) + 1}/${i.day}/${getYear(date)}`)));
+    calendar.map(i => (i.isFuture = isFuture(`${getMonth(date) + 1}/${i.day}/${getYear(date)}`)));
     calendar.map(i => (i.slug = `0${getMonth(date) + 1}/${i.day}/${getYear(date)}`));
     this.setState({ calendar, monthStartsAt });
   };
@@ -106,6 +107,7 @@ class List extends Component {
                 currency={currency}
                 monthStartsAt={item.day === 1 && monthStartsAt}
                 isSunday={item.isSunday}
+                isFuture={item.isFuture}
                 setDateType={setDateType}
               />
             ))

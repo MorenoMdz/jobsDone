@@ -136,10 +136,10 @@ class List extends Component {
           <Form onSubmit={this.handleUpdate} initialData={{ ...item }}>
             <FormInput type="hidden" name="id" />
             <FormInput type="hidden" name="created-at" value={item.created_at} />
-            <FormInput type="text" name="title" placeholder={item.title || 'title'} />
-            <FormSelect name="type_id" options={types} required />
-            <FormInput type="number" name="value" placeholder={item.value || 'value'} />
-            <FormInput type="number" name="duration" placeholder={item.duration || 'duration'} />
+            <FormInput type="text" name="title" placeholder={item.title || 'title'} className="row" />
+            <FormSelect name="type_id" options={types} required className="column" />
+            <FormInput type="number" name="value" placeholder={item.value || 'value'} className="column" />
+            <FormInput type="number" name="duration" placeholder={item.duration || 'duration'} className="column" />
             <button type="submit" className="save-btn">
               Update
             </button>

@@ -18,7 +18,7 @@ const Header = ({ setDateType, selected }) => {
 
   return (
     <Container>
-      <NavLink to="/">
+      <NavLink to="/list">
         <h3>JobsDone</h3>
       </NavLink>
       <span>Welcome back, {userData.username}</span>

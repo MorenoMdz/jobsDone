@@ -12,12 +12,15 @@ export const Container = styled.div`
   margin: 5px;
   padding: 15px;
   background: ${props => props.isSunday && `#444`};
+  background: ${props => props.isFuture && `#222`};
 
   :hover {
     opacity: 0.9;
     cursor: pointer;
   }
-
+  h4 {
+    color: ${props => props.isFuture && `#aaa`};
+  }
   span {
     font-weight: bold;
   }

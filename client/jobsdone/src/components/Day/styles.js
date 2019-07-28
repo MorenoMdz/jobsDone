@@ -135,6 +135,11 @@ export const TasksList = styled.div`
 
       span {
         margin: 2px auto !important;
+        border-bottom: 1px solid #555;
+        line-height: 1.5rem;
+        span {
+          border-bottom: none;
+        }
       }
     }
 
@@ -147,7 +152,7 @@ export const TasksList = styled.div`
     }
     .row {
       width: 98% !important;
-      background: orange;
+      background: teal;
       text-align: center !important;
       height: 25px;
       font-weight: bold;
@@ -157,9 +162,11 @@ export const TasksList = styled.div`
       display: flex;
       justify-content: space-around;
       align-items: center;
+
       button {
         margin: 2px auto !important;
         width: 49%;
+        display: inline;
       }
     }
   }
