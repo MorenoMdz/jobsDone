@@ -11,6 +11,7 @@ export const Container = styled.div`
   flex: 1;
   min-height: calc(100vh - 150px);
   position: relative;
+  overflow: auto;
 
   .teal-btn {
     color: #ddd;
@@ -25,6 +26,10 @@ export const Container = styled.div`
     justify-content: center;
     margin: 10px 0;
     display: inline;
+  }
+
+  @media (max-width: 599px) {
+    width: 100vw;
   }
 `;
 
@@ -88,7 +93,6 @@ export const TasksList = styled.div`
     .remove-btn {
       color: #fff;
       background-color: #d900ff;
-      /* background-color: #bd00ff; */
       margin-left: 3px;
       text-align: center;
       width: 30px;
@@ -105,6 +109,57 @@ export const TasksList = styled.div`
       opacity: 1;
       button {
         display: inline;
+      }
+    }
+  }
+
+  .show-sm {
+    display: none;
+  }
+
+  @media (max-width: 599px) {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ul {
+      width: 100%;
+    }
+
+    li {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+
+      span {
+        margin: 2px auto !important;
+      }
+    }
+
+    .show-sm {
+      display: inline;
+    }
+
+    .column {
+      width: 48% !important;
+    }
+    .row {
+      width: 98% !important;
+      background: orange;
+      text-align: center !important;
+      height: 25px;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+    .btn-box {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      button {
+        margin: 2px auto !important;
+        width: 49%;
       }
     }
   }
@@ -130,6 +185,7 @@ export const FormBox = styled.div`
     padding: 5px;
     margin: 0 5px;
     width: 100px;
+    height: 30px;
     font-weight: bold;
     cursor: pointer;
 
@@ -142,6 +198,7 @@ export const FormBox = styled.div`
     padding: 3px;
     margin: 0 5px;
     outline: none;
+    height: 30px;
   }
 
   [name='title'] {
@@ -165,6 +222,35 @@ export const FormBox = styled.div`
   }
   input:required:hover {
     opacity: 1;
+  }
+  @media (max-width: 599px) {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+
+      input {
+        height: 30px;
+        margin: 2px 2px;
+      }
+
+      button {
+        margin: 2px 2px;
+      }
+    }
+
+    .column {
+      width: 48%;
+    }
+    .row {
+      width: 98%;
+    }
   }
 `;
 

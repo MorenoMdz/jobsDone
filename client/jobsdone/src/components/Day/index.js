@@ -93,12 +93,22 @@ class List extends Component {
 
     const displayItem = item => (
       <li key={item.id}>
-        <span className="text">{item.title}</span>
-        <span className="type">{item.type}</span>
-        <span className="value">{`${currency} ${parseInt(item.value).toFixed(2)}`}</span>
-        <span className="duration">{item.duration} min</span>
+        <span className="text row">{item.title}</span>
 
-        <div className="btn-box">
+        <span className="type column">
+          <span className="show-sm">Type:</span>
+          {item.type}
+        </span>
+        <span className="value column">
+          <span className="show-sm">Total:</span>
+          {`${currency} ${parseInt(item.value).toFixed(2)}`}
+        </span>
+        <span className="duration column">
+          <span className="show-sm">Duration:</span>
+          {item.duration} min
+        </span>
+
+        <div className="btn-box column">
           <button
             className="edit-btn"
             onClick={() => {
@@ -163,11 +173,15 @@ class List extends Component {
         <div>
           <FormBox>
             <Form onSubmit={this.handleSubmit}>
-              <FormInput type="text" name="title" placeholder="Title" required />
-              <FormSelect name="type_id" options={types} required />
-              <FormInput type="number" name="value" placeholder="Value" required />
-              <FormInput type="number" name="duration" placeholder="Duration" required />
-              <button type="submit">Save</button>
+              <FormInput type="text" name="title" placeholder="Title" required className="row" />
+
+              <FormSelect name="type_id" options={types} required className="column" />
+              <FormInput type="number" name="value" placeholder="Value" required className="column" />
+
+              <FormInput type="number" name="duration" placeholder="Duration" required className="column" />
+              <button type="submit" className="column">
+                Save
+              </button>
             </Form>
           </FormBox>
           <TasksList>

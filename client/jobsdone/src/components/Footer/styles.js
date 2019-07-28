@@ -21,6 +21,9 @@ export const Container = styled.div`
   div {
     direction: rtl;
   }
+  @media (max-width: 599px) {
+    width: 100vw;
+  }
 `;
 
 export const MetaBar = styled.div`
@@ -28,9 +31,14 @@ export const MetaBar = styled.div`
   height: 30px;
   background: rgb(143, 76, 13);
   background: linear-gradient(to right, #e5405e 0%, #ffdb3a 25%, #3fffa2 50%, #3fffa2 50%, #1a9be0 73%, #ba68ed 100%);
+
+  @media (max-width: 499px) {
+    width: 280px;
+  }
 `;
 
 export const OverlapBar = styled.div`
+  border-right: 2px white solid;
   position: relative;
   top: -30px;
   width: ${props => `${props.width}px`};

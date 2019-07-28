@@ -10,12 +10,11 @@ export const Container = styled.div`
   border-bottom: 2px solid white;
   height: 70px;
 
-  /* @media (min-width: 1065px) {
-    padding: 0 145px;
+  @media (max-width: 499px) {
+    span {
+      display: none;
+    }
   }
-  @media (min-width: 768px) {
-    padding: 0 175px;
-  } */
 `;
 
 export const NavLink = styled(Link)`
