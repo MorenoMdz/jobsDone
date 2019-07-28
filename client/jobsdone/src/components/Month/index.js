@@ -57,6 +57,7 @@ class List extends Component {
     const monthStartsAt = getDay(startOfMonth(date)) + 1;
     const daysInMonth = getDaysInMonth(date);
     const calendar = Array.from({ length: daysInMonth }, (v, i) => i + 1).map(item => ({ ...item, day: item }));
+    // eslint-disable-next-line
     calendar.map(item => {
       let dayTotal = 0;
       list.map(day => {
@@ -72,7 +73,7 @@ class List extends Component {
   };
 
   render() {
-    const { list, calendar, monthStartsAt, flash, loading, showCalendar, selectedDate } = this.state;
+    const { calendar, monthStartsAt, loading, showCalendar, selectedDate } = this.state;
     const { currency, setDateType } = this.props;
 
     return (

@@ -88,7 +88,7 @@ class List extends Component {
   };
 
   render() {
-    const { list, types, flash, loading, editingItemId, showCalendar } = this.state;
+    const { list, types, loading, editingItemId, showCalendar } = this.state;
     const { currency, selectedDate } = this.props;
 
     const displayItem = item => (

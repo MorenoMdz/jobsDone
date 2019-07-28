@@ -41,7 +41,6 @@ class Login extends Component {
           <FormBox>
             <FormInput type="text" name="email" placeholder="Your Email" />
             <FormInput type="password" name="password" placeholder="Password" />
-            {/* TODO login logic */}
             <button type="submit">Login</button>
           </FormBox>
         </Form>

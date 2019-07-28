@@ -24,7 +24,6 @@ class Config extends Component {
     const userId = localStorage.getItem('@jobsdone-id');
     const types = await api.get('types');
     const settings = await api.get(`users/${userId}`);
-    console.log('settings', settings);
     const { meta, currency } = settings.data;
     this.setState({
       types: types.data,
